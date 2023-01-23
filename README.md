@@ -1,5 +1,5 @@
 ### Your Movie Database
-## By Alex Johnson, Aitana Shough, Jennifer Holcomb, Dominik Magik, Richard Cha
+## By Alex Johnson, Aitana Shough, Jennifer Holcomb, Dominik Magic, Richard Cha
 # WIP
 
 A client for users to manage their personal movie collection(s)

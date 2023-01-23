@@ -1,6 +1,6 @@
 namespace MovieApi;
 
-public class WeatherForecast
+public class Movie
 {
     public DateTime Date { get; set; }
 
