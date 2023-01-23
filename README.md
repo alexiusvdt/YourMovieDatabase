@@ -28,12 +28,46 @@ A client for users to manage their personal movie collection(s)
 
 ## Project Details
 
+## Objectives
+
+#### User Stories
+
+A user can create and log in to a user profile.
+When logged in, a user can:
+
+* Search for a movie
+* View movie details, including movie poster, title, overview, and release date
+* Add a movie to a personal list/watchlist
+* Mark movies they have watched
+* Add a personal rating and/or review to a movie
+* Create, view, update, and delete personal lists
+
+#### Database Schema
+
+
+
+#### API Integration
+
+Integration with [TheMovieDatabase API](https://developers.themoviedb.org/3/getting-started/introduction). 
+
+![TheMovieDB logo](https://www.themoviedb.org/assets/2/v4/logos/v2/blue_long_2-9665a76b1ae401a510ec1e0ca40ddcb3b0cfe45f1d51b77a308fea0845885648.svg)
+
+
+
+
+#### Stretch Goals
+
+##### Functionality
+
+* Add support for TV shows, books, and other media types
+* Allow users to upload their own display photo
+
 
 ## #Setup/Installation Guide
  
 # Set up the API
 * Clone the repository 
-* Navigate to the `PetShelterApi` folder
+* Navigate to the `MovieApi` folder
 * Open a command line and enter the following:
   ```
   dotnet add package Microsoft.EntityFrameworkCore -v 6.0.0
@@ -60,7 +94,7 @@ A client for users to manage their personal movie collection(s)
 ```
 
 # Running the program
-* Start the API by opening a command line in the `PetShelterApi` directory and enter `dotnet run`
+* Start the API by opening a command line in the `MovieApi` directory and enter `dotnet run`
 
 
 ### API Documentation
@@ -110,7 +144,7 @@ DELETE http://localhost:5000/api/animals/{id}
 
 
 ## Known Bugs
-
+it doesnt work yet
 
 ## Thanks
 

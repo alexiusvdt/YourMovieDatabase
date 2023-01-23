@@ -1,25 +1,36 @@
-var builder = WebApplication.CreateBuilder(args);
 
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using MvcApiCall.Models;
 
-builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
+namespace MvcApiCall
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+
+            WebApplication app = builder.Build();
+
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
+        }
+    }
 }
-else
-{
-    app.UseHttpsRedirection();
-}
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
