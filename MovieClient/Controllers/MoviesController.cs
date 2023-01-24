@@ -26,7 +26,7 @@ namespace MovieClient.Controllers
         return View(Movie.GetMovies(_apikey));
     }
 
-    public IActionResult Details(string _apikey, int id)
+    public IActionResult Details (int id)
     {
       Movie movie = Movie.GetDetails(id, _apikey);
       // var poster = Movie.Poster;
