@@ -12,10 +12,10 @@ namespace MovieClient.Models
       return response.Content;
     }
 
-    public static async Task<string> Get(string apiKey, int id)
+    public static async Task<string> Get(int id, string apiKey)
     {
-      RestClient client = new RestClient("https://api.themoviedb.org/3");
-      RestRequest request = new RestRequest($"movie/{id}?api_key={apiKey}", Method.Get);
+      RestClient client = new RestClient("https://api.themoviedb.org/3/");
+      RestRequest request = new RestRequest($"movie/{id}?language=en-US&api_key={apiKey}", Method.Get);
       RestResponse response = await client.GetAsync(request);
       return response.Content;
     }

@@ -1,5 +1,6 @@
 @{
   ViewData["Title"] = $"Details for {@Model.Title}";
+  Layout = "_Layout";
 }
 
 @model MovieClient.Models.Movie
@@ -12,4 +13,3 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
 <li>@Model.Overview</li>
 <li>@Model.Release_Date</li>
 
-<div>
