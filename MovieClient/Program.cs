@@ -52,6 +52,7 @@ namespace MovieClient
 
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(

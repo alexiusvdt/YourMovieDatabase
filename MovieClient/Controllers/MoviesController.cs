@@ -3,11 +3,21 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using MovieClient.Models;
 using MovieClient.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MovieClient.Controllers
 {
   public class MoviesController : Controller
   {
+    private readonly MovieClientContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public MoviesController(UserManager<ApplicationUser> userManager, MovieClientContext db)
+    {
+      _userManager = userManager;
+      _db = db;
+    }
+
     public ActionResult Create()
     {
       return View();
