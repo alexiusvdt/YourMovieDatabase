@@ -2,15 +2,17 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using MovieClient.Models;
 
 namespace MovieClient.Models
 {
   public class Movie
   {
     public int MovieId { get; set; }
-    // public int TmdbId { get; set; } 
+    public int Id { get; set; } 
 
     //need to add logic to parse JSON "name" keys to string[], ignoring "id" keys
+    public List<Genre> Genres { get; set; }
     // public string[] Genres { get; set; }
     public string Title { get; set; }
     public string Overview { get; set; }
@@ -38,16 +40,16 @@ namespace MovieClient.Models
       return movieList;
     }
     
-    // public static Movie GetDetails(int id)
-    // {
-    //   var apiCallTask = ApiHelper.Get(id);
-    //   var result = apiCallTask.Result;
+    public static Movie GetDetails(int id, string apiKey)
+    {
+      var apiCallTask = ApiHelper.Get(apiKey, id);
+      var result = apiCallTask.Result;
 
-    //   JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
-    //   Movie movie = JsonConvert.DeserializeObject<Movie>(jsonResponse.ToString());
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      Movie movie = JsonConvert.DeserializeObject<Movie>(jsonResponse.ToString());
   
-    //   return movie;
-    // }
+      return movie;
+    }
 
     // public static void Post(Movie movie)
     // {

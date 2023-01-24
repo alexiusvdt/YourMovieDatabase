@@ -1,19 +1,29 @@
-@* @{
-  ViewData["Title"] = $"Details for {@Model.Name}";
+@{
+  ViewData["Title"] = $"Details for {@Model.Title}";
 }
 
-@model MovieClient.Models.Movies
+@using MovieClient.Models
 
-<h1>@Model.Name</h1>
+@{
+string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Poster_Path}";
+}
+<img src="@Url.Content(poster_src)" alt="Logo" width="100" height="150" />
+<h1>@Model.Title</h1>
+<li>@Model.Overview</li>
+<li>@Model.Release_Date</li>
 
 <div>
-<!-- something like this? -->
+@* <!-- something like this? -->
 <!-- <img src="{$https://image.tmdb.org/t/p/w500/@Model.Poster}"> 
 @Html.Raw("<img src='https://image.tmdb.org/t/p/w500")@Model.Poster @Html.Raw(">") -->
-<p>Species: @Model.Species</p>
-<p>Age: @Model.Age</p>
+
 </div>
 
-<p>@Html.ActionLink("Edit details", "Edit", new { id = @Model.AnimalId })</p>
+<!-- <p>@Html.ActionLink("Edit details", "Edit", new { id = @Model.AnimalId })</p>
 <p>@Html.ActionLink("Delete animal", "Delete", new { id = @Model.AnimalId })</p>
-<p>@Html.ActionLink("Return to all animals", "Index")</p> *@
+<p>@Html.ActionLink("Return to all animals", "Index")</p> --> *@
+
+  @foreach (Genre genre in Model.Genres)
+  {
+    <li>@genre.Name</li>
+  }
