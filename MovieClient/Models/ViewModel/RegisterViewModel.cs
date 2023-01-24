@@ -19,11 +19,11 @@ namespace MovieClient.ViewModels
     [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
     public string ConfirmPassword { get; set; }
 
-    [Required]
-    [Display(Name = "Your username")]
-    public string Name { get; set; }
+    // [Required]
+    // [Display(Name = "Your username")]
+    // public string Name { get; set; }
 
-    [Display(Image = "Image URL")]
-    public string Image { get; set; }
+    // [Display(Image = "Image URL")]
+    // public string Image { get; set; }
   }
 }

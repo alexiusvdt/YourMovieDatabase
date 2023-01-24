@@ -3,11 +3,21 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using MovieClient.Models;
 using MovieClient.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MovieClient.Controllers
 {
   public class MoviesController : Controller
   {
+    private readonly MovieClientContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
+
+    public MoviesController(UserManager<ApplicationUser> userManager, MovieClientContext db)
+    {
+      _userManager = userManager;
+      _db = db;
+    }
+
     public ActionResult Create()
     {
       return View();
@@ -20,13 +30,13 @@ namespace MovieClient.Controllers
       return RedirectToAction("Index");
     }
 
-    public IActionResult Details(int id)
-    {
-      Movie movie = Movie.GetDetails(id);
-      var poster = Movie.Poster;
-      ViewBag.Poster = "https://image.tmdb.org/t/p/w500" + poster;
-      return View(movie);
-    }
+    // public IActionResult Details(int id)
+    // {
+      // Movie movie = Movie.GetDetails(id);
+      // var poster = Movie.Poster;
+      // ViewBag.Poster = "https://image.tmdb.org/t/p/w500" + poster;
+      // return View(movie);
+    // }
 
     public ActionResult Edit(int id)
     {
@@ -54,11 +64,11 @@ namespace MovieClient.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost]
-    public ActionResult AddMovie(Tag tag, int movieId) // Tag being Movie category to add movie to
-    {
-      #nullable enable
-      UserMovies? joinEntity = // API call??????
-    }
+    // [HttpPost]
+    // public ActionResult AddMovie(Tag tag, int movieId) // Tag being Movie category to add movie to
+    // {
+    //   #nullable enable
+    //   UserMovies? joinEntity = // API call??????
+    // }
   }
 }
