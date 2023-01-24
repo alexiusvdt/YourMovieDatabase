@@ -7,9 +7,12 @@
 <ul>
     @foreach (Movie movie in Model)
     {
-        <li>
-            @movie.Title
-        </li>
-        
+        <li>@movie.Title</li>
+        <li>@movie.Overview</li>
+        <li>@movie.Release_Date</li>
+        <br>
+        string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.Poster_Path}";
+        <img src="@Url.Content(poster_src)" alt="Logo" width="50" height="150" />
     }
 </ul>
+

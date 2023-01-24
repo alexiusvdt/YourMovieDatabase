@@ -13,10 +13,11 @@ namespace MovieClient.Models
     //need to add logic to parse JSON "name" keys to string[], ignoring "id" keys
     // public string[] Genres { get; set; }
     public string Title { get; set; }
-    // public string Overview { get; set; }
-    // public string ReleaseDate { get; set; }
-    // public string Poster { get; set; }
-    // public string Review { get; set; }
+    public string Overview { get; set; }
+    public string Release_Date { get; set; }
+    public string Poster_Path { get; set; }
+    // we add reviews
+    public string Review { get; set; }
     // // add logic to dynamically change this
     // public int Rating { get; set; }
     // public int NumberOfRatings { get; set; }
