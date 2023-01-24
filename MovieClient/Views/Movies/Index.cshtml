@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using MovieClient.Models
+
+<ul>
+    @foreach (Movie movie in Model)
+    {
+        <li>
+            @movie.Title
+        </li>
+        
+    }
+</ul>
