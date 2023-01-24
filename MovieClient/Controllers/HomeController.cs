@@ -29,5 +29,10 @@ namespace MovieClient.Controllers
         // model.Add("treats", treats);
         // return View(model);
         // }
+
+        public ActionResult Index()
+        {
+            return View();
+        }
     }
 }

@@ -3,12 +3,15 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MovieClient.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieClient.Models
 {
   public class Movie
   {
     public int MovieId { get; set; }
+    // [Column(TypeName="TMDBId")]
     public int Id { get; set; } 
 
     //need to add logic to parse JSON "name" keys to string[], ignoring "id" keys
