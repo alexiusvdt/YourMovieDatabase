@@ -1,0 +1,19 @@
+@{
+  ViewData["Title"] = $"Details for {@Model.Name}";
+}
+
+@model MovieClient.Models.Movies
+
+<h1>@Model.Name</h1>
+
+<div>
+<!-- something like this? -->
+<!-- <img src="{$https://image.tmdb.org/t/p/w500/@Model.Poster}"> 
+@Html.Raw("<img src='https://image.tmdb.org/t/p/w500")@Model.Poster @Html.Raw(">") -->
+<p>Species: @Model.Species</p>
+<p>Age: @Model.Age</p>
+</div>
+
+<p>@Html.ActionLink("Edit details", "Edit", new { id = @Model.AnimalId })</p>
+<p>@Html.ActionLink("Delete animal", "Delete", new { id = @Model.AnimalId })</p>
+<p>@Html.ActionLink("Return to all animals", "Index")</p>
