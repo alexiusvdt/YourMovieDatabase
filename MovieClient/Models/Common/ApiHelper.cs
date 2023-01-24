@@ -26,7 +26,7 @@ namespace MovieClient.Models
       RestClient client = new RestClient("Http://localhost:5001/");
       RestRequest request = new RestRequest($"api/movies", Method.Post);
       request.AddHeader("Content-Type", "application/json");
-      request.AddJsonbody(newMovie);
+      request.AddJsonBody(newMovie);
       await client.PostAsync(request);
     }
 
@@ -35,7 +35,7 @@ namespace MovieClient.Models
       RestClient client = new RestClient("Http://localhost:5001/");
       RestRequest request = new RestRequest($"api/movies{id}", Method.Put);
       request.AddHeader("Content-Type", "application/json");
-      request.AddJsonbody(newMovie);
+      request.AddJsonBody(newMovie);
       await client.PostAsync(request);
     }
     
@@ -44,7 +44,7 @@ namespace MovieClient.Models
       RestClient client = new RestClient("Http://localhost:5001/");
       RestRequest request = new RestRequest($"api/movies{id}", Method.Delete);
       request.AddHeader("Content-Type", "application/json");
-      await client.DeleteAsync(request)
+      await client.DeleteAsync(request);
     }
   }
 }

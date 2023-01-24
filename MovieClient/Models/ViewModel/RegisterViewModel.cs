@@ -23,7 +23,7 @@ namespace MovieClient.ViewModels
     [Display(Name = "Your username")]
     public string Name { get; set; }
 
-    [Display(Image = "Image URL")]
-    public string Image { get; set; }
+    // [Display(Image = "Image URL")]
+    // public string Image { get; set; }
   }
 }

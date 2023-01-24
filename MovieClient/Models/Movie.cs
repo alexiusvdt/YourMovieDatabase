@@ -8,12 +8,13 @@ namespace MovieClient.Models
   public class Movie
   {
     public int MovieId { get; set; }
+    public int UserId { get; set; }
+    public int ApiReferenceId { get; set; }
+    public int Rating { get; set; }
     public string Genre { get; set; }
     public string Title { get; set; }
     public string Overview { get; set; }
     public string ReleaseDate { get; set; }
-    public int UserId { get; set; }
-    public int Rating { get; set; }
     public string Poster { get; set; }
     public string Review { get; set; }
   
@@ -47,7 +48,7 @@ namespace MovieClient.Models
 
     public static void Put(Movie movie)
     {
-      string jsonMovie = Jsonconvert.SerializeObject(movie);
+      string jsonMovie = JsonConvert.SerializeObject(movie);
       ApiHelper.Put(movie.MovieId, jsonMovie);
     }
 

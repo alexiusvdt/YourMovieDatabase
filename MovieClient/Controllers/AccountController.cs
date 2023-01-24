@@ -16,7 +16,7 @@ namespace MovieClient.Controllers
     {
       _userManager = userManager;
       _signInManager = signInManager;
-      // _db = db;
+      _db = db;
     }
 
     public ActionResult Index()

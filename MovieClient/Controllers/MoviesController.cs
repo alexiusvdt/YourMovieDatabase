@@ -20,13 +20,13 @@ namespace MovieClient.Controllers
       return RedirectToAction("Index");
     }
 
-    public IActionResult Details(int id)
-    {
-      Movie movie = Movie.GetDetails(id);
-      var poster = Movie.Poster;
-      ViewBag.Poster = "https://image.tmdb.org/t/p/w500" + poster;
-      return View(movie);
-    }
+    // public IActionResult Details(int id)
+    // {
+      // Movie movie = Movie.GetDetails(id);
+      // var poster = Movie.Poster;
+      // ViewBag.Poster = "https://image.tmdb.org/t/p/w500" + poster;
+      // return View(movie);
+    // }
 
     public ActionResult Edit(int id)
     {
@@ -54,11 +54,11 @@ namespace MovieClient.Controllers
       return RedirectToAction("Index");
     }
 
-    [HttpPost]
-    public ActionResult AddMovie(Tag tag, int movieId) // Tag being Movie category to add movie to
-    {
-      #nullable enable
-      UserMovies? joinEntity = // API call??????
-    }
+    // [HttpPost]
+    // public ActionResult AddMovie(Tag tag, int movieId) // Tag being Movie category to add movie to
+    // {
+    //   #nullable enable
+    //   UserMovies? joinEntity = // API call??????
+    // }
   }
 }
