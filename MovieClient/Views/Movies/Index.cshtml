@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using MovieClient.Models
+
+<ul>
+    @foreach (Movie movie in Model)
+    {
+        <li>@Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})</li>
+        <br>
+        string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.Poster_Path}";
+        <img src="@Url.Content(poster_src)" alt="Logo" width="100" height="150" />
+    }
+</ul>
+
