@@ -8,6 +8,18 @@ namespace MovieClient.Controllers
 {
   public class MoviesController : Controller
   {
+    private readonly string _apikey;
+
+    public HomeController(IConfiguration configuration)
+    {
+        _apikey = configuration["TMDB"];
+    }
+
+    public IActionResult Index()
+    {
+        return View(Movie.GetMovies(_apikey));
+    }
+
     public ActionResult Create()
     {
       return View();
@@ -16,6 +28,7 @@ namespace MovieClient.Controllers
     [HttpPost]
     public ActionResult Create(Movie movie)
     {
+      // 
       Movie.Post(movie);
       return RedirectToAction("Index");
     }
