@@ -19,15 +19,10 @@ namespace MovieClient.Controllers
         _db = db;
         }
 
-        // [HttpGet("/")]
-        // public async Task<ActionResult> Index()
-        // {
-        // Flavor[] flavors = _db.Flavors.ToArray();
-        // Treat[] treats = _db.Treats.ToArray();
-        // Dictionary<string, object[]> model = new Dictionary<string, object[]>();
-        // model.Add("flavors", flavors);
-        // model.Add("treats", treats);
-        // return View(model);
-        // }
+        [HttpGet("/")]
+        public async Task<ActionResult> Index()
+        {
+        return View();
+        }
     }
 }
