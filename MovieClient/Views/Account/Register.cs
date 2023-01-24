@@ -19,7 +19,7 @@
 {
   @Html.LabelFor(user => user.Email)
   @Html.TextBoxFor(user=> user.Email)
-
+  
   @*
   @Html.LabelFor(user=> user.Name)
   @Html.EditorFor(user=> user.Name)

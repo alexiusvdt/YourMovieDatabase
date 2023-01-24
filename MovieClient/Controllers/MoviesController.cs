@@ -9,61 +9,77 @@ namespace MovieClient.Controllers
 {
   public class MoviesController : Controller
   {
+    private readonly string _apikey;
     private readonly MovieClientContext _db;
     private readonly UserManager<ApplicationUser> _userManager;
 
-    public MoviesController(UserManager<ApplicationUser> userManager, MovieClientContext db)
+    public MoviesController(UserManager<ApplicationUser> userManager, MovieClientContext db, IConfiguration configuration)
     {
+      _apikey = configuration["TMDB"];
       _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Create()
+    public IActionResult Index()
     {
-      return View();
+        return View(Movie.GetMovies(_apikey));
     }
 
-    [HttpPost]
-    public ActionResult Create(Movie movie)
-    {
-      Movie.Post(movie);
-      return RedirectToAction("Index");
-    }
-
-    // public IActionResult Details(int id)
+    // public ActionResult Create()
     // {
-      // Movie movie = Movie.GetDetails(id);
-      // var poster = Movie.Poster;
-      // ViewBag.Poster = "https://image.tmdb.org/t/p/w500" + poster;
-      // return View(movie);
+    //   return View();
     // }
 
-    public ActionResult Edit(int id)
+    // [HttpPost]
+    // public ActionResult Create(Movie movie)
+    // {
+    //   // 
+    //   Movie.Post(movie);
+    //   return RedirectToAction("Index");
+    // }
+
+    public IActionResult Details(int id)
     {
       Movie movie = Movie.GetDetails(id);
+      var poster = Movie.Poster;
+      ViewBag.Poster = "https://image.tmdb.org/t/p/w500" + poster;
       return View(movie);
     }
 
-    [HttpPost]
-    public ActionResult Edit(Movie movie)
-    {
-      Movie.Put(movie);
-      return RedirectToAction("Details", new { id = movie.MovieId });
-    }
+    // public ActionResult Edit(int id)
+    // {
+    //   Movie movie = Movie.GetDetails(id);
+    //   return View(movie);
+    // }
 
-    public ActionResult Delete(int id)
-    {
-      Movie movie = Movie.GetDetails(id);
-      return View(movie);
-    }
+    // [HttpPost]
+    // public ActionResult Edit(Movie movie)
+    // {
+    //   Movie.Put(movie);
+    //   return RedirectToAction("Details", new { id = movie.MovieId });
+    // }
 
-    [HttpPost, ActionName("Delete")]
-    public ActionResult DeleteConfirmed(int id)
-    {
-      Movie.Delete(id);
-      return RedirectToAction("Index");
-    }
+    // public ActionResult Delete(int id)
+    // {
+    //   Movie movie = Movie.GetDetails(id);
+    //   return View(movie);
+    // }
 
+    // [HttpPost, ActionName("Delete")]
+    // public ActionResult DeleteConfirmed(int id)
+    // {
+    //   Movie.Delete(id);
+    //   return RedirectToAction("Index");
+    // }
+
+    // [HttpPost]
+    // public ActionResult AddMovie(Tag tag, int movieId) // Tag being Movie category to add movie to
+    // {
+    //   #nullable enable
+    //   UserMovies? joinEntity = // API call??????
+    // }
+  }
+}
     // [HttpPost]
     // public ActionResult AddMovie(Tag tag, int movieId) // Tag being Movie category to add movie to
     // {
