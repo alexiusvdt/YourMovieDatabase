@@ -46,10 +46,14 @@ namespace MovieClient.Models
       return movie;
     }
 
-    // public static void Put(Movie movie)
-    // {
-    //   string jsonMovie = Jsonconvert.SerializeObject(movie);
-    //   ApiHelper.Put(movie.MovieId, jsonMovie);
-    // }
+    public static List<Movie> GetBasicSearch(string query, string apiKey)
+    {
+      var apiCallTask = ApiHelper.BasicSearch(apiKey, query);
+      var result = apiCallTask.Result;
+
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      List<Movie> resultsList = JsonConvert.DeserializeObject<List<Movie>>(jsonResponse["results"].ToString());
+      return resultsList;
+    }
   }
 }

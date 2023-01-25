@@ -68,12 +68,16 @@ namespace MovieClient.Controllers
 
       User thisUser = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
 
-      // currentUser.Id changed to 
       _db.UserMovies.Add(new UserMovie() { MovieId = inputId, UserId = thisUser.UserId});
       _db.SaveChanges();
 
-      return RedirectToAction("Details", new { id = inputId});
+      return RedirectToAction("Index");
     }
+
+    public IActionResult Search(string query)
+    {
+      return View(Movie.GetBasicSearch(query, _apikey));
+    } 
   }
 }
 
@@ -86,5 +90,4 @@ namespace MovieClient.Controllers
     //   _db.UserMovies.Remove(joinEntry);
     //   _db.SaveChanges();
 
-    //   return RedirectToAction("Details", new { id = id});
-    // }
+    //  

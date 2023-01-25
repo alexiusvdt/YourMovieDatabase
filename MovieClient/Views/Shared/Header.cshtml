@@ -28,6 +28,15 @@
                         }
                     </ul>
                 </div>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <li class="nav-item">
+                    @using (Html.BeginForm("Search", "Movies", FormMethod.Get))
+                    {
+                        @Html.TextBox("query", "", new { @class = "form-control" })
+                        <input type="submit" value="Search">
+                    }
+                    </li>
+                </div>
             </div>
         </nav>
     </header>

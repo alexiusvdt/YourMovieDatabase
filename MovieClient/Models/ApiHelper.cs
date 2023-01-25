@@ -20,5 +20,13 @@ namespace MovieClient.Models
       RestResponse response = await client.GetAsync(request);
       return response.Content;
     }
+
+    public static async Task<string> BasicSearch(string apiKey, string query)
+    {
+      RestClient client = new RestClient("https://api.themoviedb.org/3");
+      RestRequest request = new RestRequest($"search/movie?api_key={apiKey}&language=en-US&query={query}", Method.Get);
+      RestResponse response = await client.GetAsync(request);
+      return response.Content;
+    }
   }
 }
