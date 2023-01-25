@@ -3,6 +3,7 @@
 }
 
 @using MovieClient.Models
+@model MovieClient.Models.Movie
 
 @{
 string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Poster_Path}";
@@ -17,13 +18,11 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
   <li>@genre.Name</li>
 }
 
-@Html.ActionLink("Mark as watched", "AddToUser", "Movies", new { id = @Model.Id});
+@* @Html.ActionLink("Mark as watched", "AddToUser", "Movies", new { id = @Model.Id}); *@
 
 
-@* @using (Html.BeginForm("CreateOrUpdate", "Movies"))
+@using (Html.BeginForm("AddToUser", "Movies"))
 {
-  @Html.Hidden("MovieId", Model.MovieId)
-  @Html.Label("Mark as watched")
-  @Html.TextBoxFor(model => model.Title)
-  <input type="submit" value="Create"/>
-} *@
+  @Html.Hidden("inputId", Model.Id)
+  <input type="submit" value="Mark as watched"/>
+}

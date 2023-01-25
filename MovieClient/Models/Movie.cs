@@ -46,21 +46,10 @@ namespace MovieClient.Models
       return movie;
     }
 
-    // public static void Post(Movie movie)
-    // {
-    //   string jsonMovie = JsonConvert.SerializeObject(movie);
-    //   ApiHelper.Post(jsonMovie);
-    // }
-
     // public static void Put(Movie movie)
     // {
     //   string jsonMovie = Jsonconvert.SerializeObject(movie);
     //   ApiHelper.Put(movie.MovieId, jsonMovie);
-    // }
-
-    // public static void Delete(int id)
-    // {
-    //   ApiHelper.Delete(id);
     // }
   }
 }

@@ -38,10 +38,15 @@ namespace MovieClient.Controllers
       }
       else
       {
-        ApplicationUser user = new ApplicationUser { UserName = model.Email };
+        ApplicationUser user = new ApplicationUser { UserName = model.Email, };
         IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+        User userObject = new User { UserAccount = user };
         if (result.Succeeded)
         {
+          
+          _db.Users.Add(userObject);
+          _db.SaveChanges();
+          
           return RedirectToAction("Index");
         }
         else
