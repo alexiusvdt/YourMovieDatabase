@@ -1,0 +1,69 @@
+body {
+flex-flow: row wrap;
+  justify-content: space-evenly;
+  flex: 6; 
+  margin-bottom: 60px;
+  padding: 10px 10px;
+  background-color: rgba(246, 239, 224, 0.888);
+  padding: 10px 10px 10px;
+  background-color: rgba(236, 227, 209, 0.888);
+  padding-bottom: 30px;
+}
+
+.poster {
+  padding: 25px 10px;
+  height: 325px;
+  height: 335px;
+}
+
+.poster>img {
+  /* border-style: solid; */
+  .poster-image {
+  border: 4px solid white;
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
+}
+
+.poster-image:hover{
+  transform: scale(1.1);
+  transition: all 0.35s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+/* text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue; */
+
+/* .poster-image::before,
+.poster-image::after {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-top: 32px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 32px solid rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: '';
+  transition: all 0.3s ease;
+  z-index: 1;
+  opacity: 0;
+  transform: scaleY(2);
+} */
+
+/* .poster-image:hover::before,
+.poster-image:hover::after {
+  transform: scale(1);
+  opacity: 1;
+} */
+
+/* .poster-image.grow {
+  transition: all .2s ease-in-out;
+} */
+
+.title-info {
+  line-height: 1;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.container {
+  width: 80%;
+}
