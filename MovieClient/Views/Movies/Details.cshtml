@@ -18,6 +18,10 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
   <div class="col-sm-8 align-self-center">
     <h2 class="display-5">@Model.Title</h2>
     <p class="lead">Release Date: @Model.Release_Date</p>
+    @foreach (Genre genre in Model.Genres)
+    {
+      <li>@genre.Name</li>
+    }
     <blockquote class="blockquote text-justify">
       <p>@Model.Overview</p>
     </blockquote>
@@ -28,25 +32,14 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
       </div>
       <div class="card-body">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Add to watchlist</li>
           <li class="list-group-item">Rate / Review</li>
+          @using (Html.BeginForm("AddToUser", "Movies"))
+          {
+            @Html.Hidden("inputId", Model.Id)
+            <input type="submit" value="Mark as watched"/>
+          }
         </ul>
       </div>
     </div>
   </div>
 </div>
-
-
-@foreach (Genre genre in Model.Genres)
-{
-  <li>@genre.Name</li>
-}
-
-@* @Html.ActionLink("Mark as watched", "AddToUser", "Movies", new { id = @Model.Id}); *@
-
-
-@using (Html.BeginForm("AddToUser", "Movies"))
-{
-  @Html.Hidden("inputId", Model.Id)
-  <input type="submit" value="Mark as watched"/>
-}
