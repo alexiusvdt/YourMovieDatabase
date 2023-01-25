@@ -17,7 +17,7 @@ namespace MovieClient.Models
     public string Overview { get; set; }
     public string Release_Date { get; set; }
     public string Poster_Path { get; set; }
-    public string Review { get; set; }
+    public List<Review> Reviews { get; set; }
     public int Rating { get; set; }
     public int NumberOfRatings { get; set; }
     public UserMovie joinEntity { get; set; }

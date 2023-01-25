@@ -11,8 +11,8 @@ using MovieClient.Models;
 namespace MovieClient.Migrations
 {
     [DbContext(typeof(MovieClientContext))]
-    [Migration("20230125174144_Initial")]
-    partial class Initial
+    [Migration("20230125182044_ReviewDBId")]
+    partial class ReviewDBId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -256,15 +256,38 @@ namespace MovieClient.Migrations
                     b.Property<string>("Release_Date")
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Review")
-                        .HasColumnType("longtext");
-
                     b.Property<string>("Title")
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("MovieClient.Models.Review", b =>
+                {
+                    b.Property<string>("ReviewId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("MovieId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("MovieClient.Models.User", b =>
@@ -366,6 +389,25 @@ namespace MovieClient.Migrations
                         .HasForeignKey("MovieId");
                 });
 
+            modelBuilder.Entity("MovieClient.Models.Review", b =>
+                {
+                    b.HasOne("MovieClient.Models.Movie", "Movie")
+                        .WithMany("Reviews")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MovieClient.Models.User", "User")
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MovieClient.Models.User", b =>
                 {
                     b.HasOne("MovieClient.Models.ApplicationUser", "UserAccount")
@@ -398,12 +440,16 @@ namespace MovieClient.Migrations
                 {
                     b.Navigation("Genres");
 
+                    b.Navigation("Reviews");
+
                     b.Navigation("joinEntity");
                 });
 
             modelBuilder.Entity("MovieClient.Models.User", b =>
                 {
                     b.Navigation("JoinEntities");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }
