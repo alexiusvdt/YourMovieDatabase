@@ -2,7 +2,7 @@ namespace MovieClient.Models
 {
   public class Review
   {
-    public string ReviewId { get; set; }
+    public int ReviewId { get; set; }
     public string Text { get; set; }
     public int Rating { get; set; }
     public int MovieId { get; set; }

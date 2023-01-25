@@ -1,0 +1,24 @@
+@{
+  ViewData["Title"] = $"Create review for {@ViewBag.MovieTitle}";
+  Layout = "_Layout";
+}
+
+@model MovieClient.Models.Review
+
+@{
+  int num = ViewBag.MovieId;
+}
+@using (Html.BeginForm("CreateReview", "Movies"))
+{
+    @Html.Hidden("MovieId", num)
+
+    @Html.LabelFor(model => model.Text)
+    @Html.TextBoxFor(model => model.Text)
+
+    @Html.LabelFor(model => model.Rating)
+    @Html.EditorFor(model => model.Rating)
+
+
+
+    <input type="submit" value="Save" />
+}

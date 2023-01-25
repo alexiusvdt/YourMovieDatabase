@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MovieClient.Models;
 
@@ -10,9 +11,10 @@ using MovieClient.Models;
 namespace MovieClient.Migrations
 {
     [DbContext(typeof(MovieClientContext))]
-    partial class MovieClientContextModelSnapshot : ModelSnapshot
+    [Migration("20230125190406_UpdateIntReviewId")]
+    partial class UpdateIntReviewId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

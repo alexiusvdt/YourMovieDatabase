@@ -27,26 +27,6 @@ namespace MovieClient.Controllers
         return View(Movie.GetMovies(_apikey));
     }
 
-    [HttpPost]
-    public ActionResult CreateOrUpdate(Movie movie, int MovieId)
-    {
-      // IF movie does not exist, take new movie object, add to db
-      // if ((_db.Movies.FirstOrDefault(entry => movie.MovieId == entry.MovieId)) == null)
-      // {
-      //   _db.Movies.Add(movie);
-      //   _db.SaveChanges();
-      // }
-      
-      // check IF movie does exist, _db.Update(movie), redirect to details page
-      // movie.Review = movie.Review;
-      movie.Rating = (movie.Rating + movie.Rating) / movie.NumberOfRatings;
-      movie.NumberOfRatings += 1;
-      _db.Update(movie);
-      _db.SaveChanges();
-
-      return RedirectToAction("Details", new { id = movie.MovieId });
-    }
-
     public IActionResult Details(int id)
     {
       Movie movie = Movie.GetDetails(id, _apikey);
@@ -73,6 +53,35 @@ namespace MovieClient.Controllers
       _db.SaveChanges();
 
       return RedirectToAction("Details", new { id = inputId});
+    }
+
+    public ActionResult CreateReview (int inputId)
+    {
+      Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == inputId);
+      ViewBag.MovieId = movie.Id;
+      ViewBag.MovieTitle = movie.Title;
+
+      return View();
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> CreateReview (Review review, int MovieId)
+    {
+      Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == review.MovieId);
+
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      User thisUser = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
+      review.UserId = thisUser.UserId;
+
+      _db.Reviews.Add(review);
+
+      movie.NumberOfRatings = movie.NumberOfRatings + 1;
+      movie.Rating = (movie.Rating + review.Rating) / movie.NumberOfRatings;
+
+      _db.Movies.Update(movie);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = movie.Id });
     }
   }
 }

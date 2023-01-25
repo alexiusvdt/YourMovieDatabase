@@ -39,6 +39,7 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
             <input type="submit" value="Mark as watched"/>
           }
         </ul>
+        @Html.ActionLink("Review", "CreateReview", "Movies", new { inputId = Model.Id})
       </div>
     </div>
   </div>

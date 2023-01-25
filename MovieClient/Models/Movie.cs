@@ -10,7 +10,6 @@ namespace MovieClient.Models
 {
   public class Movie
   {
-    public int MovieId { get; set; }
     public int Id { get; set; } 
     public List<Genre> Genres { get; set; }
     public string Title { get; set; }
