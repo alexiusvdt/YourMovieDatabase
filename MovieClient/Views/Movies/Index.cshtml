@@ -5,14 +5,21 @@
 
 @using MovieClient.Models
 <div class="container-img">
-<ul>
+
     @foreach (Movie movie in Model)
     {
-        <li>@Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})</li>
-        <br>
+        @*<li>@Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})</li>
+        <br>*@
         string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.Poster_Path}";
         <img src="@Url.Content(poster_src)" alt="Logo" width="100" height="150" />
+        <div class="title-info">
+            <ul>
+                <li>@Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})</li>
+            </ul>
+        </div>
+        
+        @*@Html.ActionImage("Details", new id = movie.Id), "@Url.Content(poster_src)", "Details")*@
     }
-</ul>
+
 </div>
 

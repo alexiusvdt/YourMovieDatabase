@@ -17,6 +17,29 @@ body {
   margin-bottom: 60px;
 }
 
-container-image {
-  display: inline;
+.container-img {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  align-content: space-between;
+  align-items: center;
+  justify-content: center;
+  /* flex: 5; */
+}
+
+.title-info{
+  -webkit-flex: 1 1 100%;
+  flex: 1 1 100px;
+  padding: 25px 45px;
+  text-align: center;
+}
+
+.title-info li{
+   padding: 0;
+   margin: 0 0 10px;
+}
+
+.container {
+  width: 80%;
 }

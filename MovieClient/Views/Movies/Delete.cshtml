@@ -1,0 +1,18 @@
+@{
+  ViewData["Title"] = $"Delete {@Model.Title} from your watched list";
+  Layout = "_Layout";
+}
+
+@model MovieClient.Models.Movie
+
+<p>Are you sure you'd like to remove @Model.Title from your list?</p>
+
+@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)
+@using (Html.BeginForm())
+{
+  <input type="submit" value="Delete" />
+}
+
+@Html.ActionLink("Back to popular movies", "Index")
+@*dunno where we're going to have a view of all the user-specific movies, but link 'em here*@
+@Html.ActionLink("Go to my database", "Index", "ControllerNameHere")

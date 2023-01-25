@@ -1,0 +1,12 @@
+@{
+  ViewData["Title"] = $"Add {@Model.Title} to your watched list";
+  Layout = "_Layout";
+}
+
+@model MovieClient.Models.Movie
+
+<p>Are you sure you'd like to add @Model.Title to your list?</p>
+
+<p>@Html.ActionLink("Back to popular movies", "Index")</p>
+@*dunno where we're going to have a view of all the user-specific movies, but link 'em here*@
+<p>@Html.ActionLink("Go to my database", "Index", "ControllerNameHere")</p>
