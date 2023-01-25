@@ -1,21 +1,14 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
+/* body {
+flex-flow: row wrap;
+  justify-content: space-evenly;
+  flex: 6; 
   margin-bottom: 60px;
-}
+  padding: 10px 10px;
+  background-color: rgba(246, 239, 224, 0.888);
+  padding: 10px 10px 10px;
+  background-color: rgba(236, 227, 209, 0.888);
+  padding-bottom: 30px;
+} */
 
 .container-movie {
   display: flex;
@@ -25,11 +18,6 @@ body {
   padding: 10px 10px 10px;
   background-color: rgba(236, 227, 209, 0.888);
   padding-bottom: 30px;
-}
-
-.poster {
-  padding: 25px 10px;
-  height: 335px;
 }
 
 .poster-image {
@@ -50,7 +38,6 @@ body {
   transition: all 0.35s ease;
   background-color: rgba(0, 0, 0, 0.5);
 }
-
 
 
 /* .poster-image::before,

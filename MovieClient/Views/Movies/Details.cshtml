@@ -7,7 +7,15 @@
 @model MovieClient.Models.Movie
 
 @{
-string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Poster_Path}";
+  string poster_src = "";
+    if (Model.Poster_Path == null)
+    {
+      poster_src = "https://www.altavod.com/assets/images/poster-placeholder.png";
+    }
+    else
+    {
+      poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Poster_Path}";
+    }
 }
 
 <div class="row">
