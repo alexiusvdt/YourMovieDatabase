@@ -25,11 +25,6 @@ namespace MovieClient.Controllers
         return View(Movie.GetMovies(_apikey));
     }
 
-    // public ActionResult Create()
-    // {
-    //   return View();
-    // }
-
     // gets invoked when someone tries to create a review for a movie on movie details page
     [HttpPost]
     public ActionResult CreateOrUpdate(Movie movie, int MovieId)
@@ -63,6 +58,16 @@ namespace MovieClient.Controllers
       }
 
       return View(movie);
+    }
+
+    [HttpPost]
+    public ActionResult AddToUser (int id)
+    { 
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      _db.UserMovies.Add(new UserMovie() { MovieId = id, UserId = currentUser.Id});
+
+      return RedirectToAction("Details", new { id = id});
     }
 
     // public ActionResult Edit(int id)
