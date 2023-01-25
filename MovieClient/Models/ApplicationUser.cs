@@ -4,6 +4,5 @@ namespace MovieClient.Models
 {
   public class ApplicationUser : IdentityUser
   {
-    
   }
 }

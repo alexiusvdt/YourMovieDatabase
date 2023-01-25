@@ -11,7 +11,7 @@ using MovieClient.Models;
 namespace MovieClient.Migrations
 {
     [DbContext(typeof(MovieClientContext))]
-    [Migration("20230124223114_Initial")]
+    [Migration("20230125000908_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -215,7 +215,7 @@ namespace MovieClient.Migrations
 
             modelBuilder.Entity("MovieClient.Models.Genre", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GenreId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -225,7 +225,7 @@ namespace MovieClient.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("GenreId");
 
                     b.HasIndex("MovieId");
 
@@ -241,11 +241,17 @@ namespace MovieClient.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
+                    b.Property<int>("NumberOfRatings")
+                        .HasColumnType("int");
+
                     b.Property<string>("Overview")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Poster_Path")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Release_Date")
                         .HasColumnType("longtext");
@@ -280,7 +286,8 @@ namespace MovieClient.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("MovieId")
+                        .IsUnique();
 
                     b.ToTable("UserMovies");
                 });
@@ -350,8 +357,8 @@ namespace MovieClient.Migrations
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("MovieClient.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
+                        .WithOne("joinEntity")
+                        .HasForeignKey("MovieClient.Models.UserMovie", "MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -363,6 +370,8 @@ namespace MovieClient.Migrations
             modelBuilder.Entity("MovieClient.Models.Movie", b =>
                 {
                     b.Navigation("Genres");
+
+                    b.Navigation("joinEntity");
                 });
 #pragma warning restore 612, 618
         }

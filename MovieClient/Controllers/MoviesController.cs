@@ -30,17 +30,38 @@ namespace MovieClient.Controllers
     //   return View();
     // }
 
-    // [HttpPost]
-    // public ActionResult Create(Movie movie)
-    // {
-    //   // 
-    //   Movie.Post(movie);
-    //   return RedirectToAction("Index");
-    // }
+    // gets invoked when someone tries to create a review for a movie on movie details page
+    [HttpPost]
+    public ActionResult CreateOrUpdate(Movie movie, int MovieId)
+    {
+      // IF movie does not exist, take new movie object, add to db
+      // if ((_db.Movies.FirstOrDefault(entry => movie.MovieId == entry.MovieId)) == null)
+      // {
+      //   _db.Movies.Add(movie);
+      //   _db.SaveChanges();
+      // }
+      
+      // check IF movie does exist, _db.Update(movie), redirect to details page
+      // movie.Review = movie.Review;
+      movie.Rating = (movie.Rating + movie.Rating) / movie.NumberOfRatings;
+      movie.NumberOfRatings += 1;
+      _db.Update(movie);
+      _db.SaveChanges();
+
+      return RedirectToAction("Details", new { id = movie.MovieId });
+    }
 
     public IActionResult Details(int id)
     {
       Movie movie = Movie.GetDetails(id, _apikey);
+
+      // IF movie does not exist, take new movie object, add to db
+      if ((_db.Movies.FirstOrDefault(entry => movie.Id == entry.Id)) == null)
+      {
+        _db.Movies.Add(movie);
+        _db.SaveChanges();
+      }
+
       return View(movie);
     }
 

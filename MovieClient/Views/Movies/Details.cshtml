@@ -2,7 +2,7 @@
   ViewData["Title"] = $"Details for {@Model.Title}";
 }
 
-@model MovieClient.Models.Movie
+@using MovieClient.Models
 
 @{
 string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Poster_Path}";
@@ -12,4 +12,16 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
 <li>@Model.Overview</li>
 <li>@Model.Release_Date</li>
 
-<div>
+@foreach (Genre genre in Model.Genres)
+{
+  <li>@genre.Name</li>
+}
+
+
+@* @using (Html.BeginForm("CreateOrUpdate", "Movies"))
+{
+  @Html.Hidden("MovieId", Model.MovieId)
+  @Html.Label("Mark as watched")
+  @Html.TextBoxFor(model => model.Title)
+  <input type="submit" value="Create"/>
+} *@

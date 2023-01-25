@@ -83,7 +83,9 @@ namespace MovieClient.Migrations
                     Poster_Path = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Review = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    NumberOfRatings = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,7 +224,7 @@ namespace MovieClient.Migrations
                 name: "Genre",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    GenreId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -230,7 +232,7 @@ namespace MovieClient.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Genre", x => x.Id);
+                    table.PrimaryKey("PK_Genre", x => x.GenreId);
                     table.ForeignKey(
                         name: "FK_Genre_Movies_MovieId",
                         column: x => x.MovieId,
@@ -317,7 +319,8 @@ namespace MovieClient.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_UserMovies_MovieId",
                 table: "UserMovies",
-                column: "MovieId");
+                column: "MovieId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
