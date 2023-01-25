@@ -37,7 +37,7 @@ namespace MovieClient.Models
     
     public static Movie GetDetails(int id, string apiKey)
     {
-      var apiCallTask = ApiHelper.Get(id, apiKey);
+      var apiCallTask = ApiHelper.Get(apiKey, id);
       var result = apiCallTask.Result;
 
       JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);

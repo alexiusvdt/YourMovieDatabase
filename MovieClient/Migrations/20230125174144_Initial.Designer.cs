@@ -11,11 +11,7 @@ using MovieClient.Models;
 namespace MovieClient.Migrations
 {
     [DbContext(typeof(MovieClientContext))]
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.Designer.cs
-    [Migration("20230124223254_Initial")]
-========
-    [Migration("20230125151416_Initial")]
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.Designer.cs
+    [Migration("20230125174144_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -219,11 +215,7 @@ namespace MovieClient.Migrations
 
             modelBuilder.Entity("MovieClient.Models.Genre", b =>
                 {
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.Designer.cs
-                    b.Property<int>("Id")
-========
                     b.Property<int>("GenreId")
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.Designer.cs
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -233,11 +225,7 @@ namespace MovieClient.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.Designer.cs
-                    b.HasKey("Id");
-========
                     b.HasKey("GenreId");
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.Designer.cs
 
                     b.HasIndex("MovieId");
 
@@ -253,24 +241,18 @@ namespace MovieClient.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.Designer.cs
-========
                     b.Property<int>("NumberOfRatings")
                         .HasColumnType("int");
 
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.Designer.cs
                     b.Property<string>("Overview")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Poster_Path")
                         .HasColumnType("longtext");
 
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.Designer.cs
-========
                     b.Property<int>("Rating")
                         .HasColumnType("int");
 
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.Designer.cs
                     b.Property<string>("Release_Date")
                         .HasColumnType("longtext");
 
@@ -290,9 +272,6 @@ namespace MovieClient.Migrations
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("MoviesWatched")
-                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
@@ -387,8 +366,6 @@ namespace MovieClient.Migrations
                         .HasForeignKey("MovieId");
                 });
 
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.Designer.cs
-========
             modelBuilder.Entity("MovieClient.Models.User", b =>
                 {
                     b.HasOne("MovieClient.Models.ApplicationUser", "UserAccount")
@@ -398,7 +375,6 @@ namespace MovieClient.Migrations
                     b.Navigation("UserAccount");
                 });
 
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.Designer.cs
             modelBuilder.Entity("MovieClient.Models.UserMovie", b =>
                 {
                     b.HasOne("MovieClient.Models.Movie", "Movie")
@@ -428,11 +404,6 @@ namespace MovieClient.Migrations
             modelBuilder.Entity("MovieClient.Models.User", b =>
                 {
                     b.Navigation("JoinEntities");
-                });
-
-            modelBuilder.Entity("MovieClient.Models.Movie", b =>
-                {
-                    b.Navigation("Genres");
                 });
 #pragma warning restore 612, 618
         }

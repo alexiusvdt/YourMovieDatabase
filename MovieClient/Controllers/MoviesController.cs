@@ -74,6 +74,8 @@ namespace MovieClient.Controllers
 
       return RedirectToAction("Details", new { id = inputId});
     }
+  }
+}
 
     // [HttpPost]
     // public ActionResult RemoveFromUser (int id)

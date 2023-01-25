@@ -221,19 +221,11 @@ namespace MovieClient.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.cs
-                name: "Genre",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-========
                 name: "Users",
                 columns: table => new
                 {
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    MoviesWatched = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserAccountId = table.Column<string>(type: "varchar(255)", nullable: true)
@@ -255,7 +247,6 @@ namespace MovieClient.Migrations
                 columns: table => new
                 {
                     GenreId = table.Column<int>(type: "int", nullable: false)
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.cs
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -263,11 +254,7 @@ namespace MovieClient.Migrations
                 },
                 constraints: table =>
                 {
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.cs
-                    table.PrimaryKey("PK_Genre", x => x.Id);
-========
                     table.PrimaryKey("PK_Genre", x => x.GenreId);
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.cs
                     table.ForeignKey(
                         name: "FK_Genre_Movies_MovieId",
                         column: x => x.MovieId,
@@ -293,15 +280,12 @@ namespace MovieClient.Migrations
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.cs
-========
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_UserMovies_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "UserId",
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.cs
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -347,14 +331,6 @@ namespace MovieClient.Migrations
                 name: "IX_Genre_MovieId",
                 table: "Genre",
                 column: "MovieId");
-<<<<<<<< HEAD:MovieClient/Migrations/20230124223254_Initial.cs
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserMovies_ApplicationUserId",
-                table: "UserMovies",
-                column: "ApplicationUserId");
-========
->>>>>>>> main:MovieClient/Migrations/20230125151416_Initial.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMovies_MovieId",
