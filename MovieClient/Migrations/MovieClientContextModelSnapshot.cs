@@ -236,9 +236,6 @@ namespace MovieClient.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<int>("NumberOfRatings")
                         .HasColumnType("int");
 
@@ -275,6 +272,7 @@ namespace MovieClient.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("UserId")

@@ -11,8 +11,8 @@ using MovieClient.Models;
 namespace MovieClient.Migrations
 {
     [DbContext(typeof(MovieClientContext))]
-    [Migration("20230125190406_UpdateIntReviewId")]
-    partial class UpdateIntReviewId
+    [Migration("20230125222148_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -236,9 +236,6 @@ namespace MovieClient.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("MovieId")
                         .HasColumnType("int");
 
                     b.Property<int>("NumberOfRatings")

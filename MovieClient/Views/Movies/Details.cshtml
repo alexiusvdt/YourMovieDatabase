@@ -18,6 +18,7 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
   <div class="col-sm-8 align-self-center">
     <h2 class="display-5">@Model.Title</h2>
     <p class="lead">Release Date: @Model.Release_Date</p>
+    <p>Rating: @ViewBag.movieReviews.Rating/10</p>
     @foreach (Genre genre in Model.Genres)
     {
       <li>@genre.Name</li>
@@ -40,6 +41,15 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
           }
         </ul>
         @Html.ActionLink("Review", "CreateReview", "Movies", new { inputId = Model.Id})
+        @if(@ViewBag.movieReviews.Reviews != null)
+        {
+        <ul>
+          @foreach (Review review in @ViewBag.movieReviews.Reviews)
+          {
+          <li>@review.Text</li>            
+          }
+        </ul>
+        }
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ using MovieClient.Models;
 using MovieClient.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieClient.Controllers
 {
@@ -37,6 +38,8 @@ namespace MovieClient.Controllers
         _db.SaveChanges();
       }
 
+      ViewBag.movieReviews = _db.Movies.Include(review => review.Reviews).FirstOrDefault(entry => entry.Id == id);
+
       return View(movie);
     }
 
@@ -48,25 +51,42 @@ namespace MovieClient.Controllers
 
       User thisUser = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
 
-      // currentUser.Id changed to 
-      _db.UserMovies.Add(new UserMovie() { MovieId = inputId, UserId = thisUser.UserId});
-      _db.SaveChanges();
+      #nullable enable
+      UserMovie? joinEntity = _db.UserMovies.FirstOrDefault(entry => (entry.MovieId == inputId) && (entry.UserId == thisUser.UserId));
+      #nullable disable
+
+      if (joinEntity == null && thisUser.UserId != 0)
+      {
+        _db.UserMovies.Add(new UserMovie() { MovieId = inputId, UserId = thisUser.UserId});
+        _db.SaveChanges();
+      }
 
       return RedirectToAction("Details", new { id = inputId});
     }
 
     public ActionResult CreateReview (int inputId)
     {
+      
       Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == inputId);
       ViewBag.MovieId = movie.Id;
       ViewBag.MovieTitle = movie.Title;
 
       return View();
+      
     }
 
     [HttpPost]
     public async Task<ActionResult> CreateReview (Review review, int MovieId)
     {
+      if (!ModelState.IsValid)
+      {
+        Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == MovieId);
+        ViewBag.MovieId = movie.Id;
+        ViewBag.MovieTitle = movie.Title;
+        return View(review);
+      }
+      else
+      {
       Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == review.MovieId);
 
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -82,6 +102,7 @@ namespace MovieClient.Controllers
       _db.Movies.Update(movie);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = movie.Id });
+      }
     }
   }
 }

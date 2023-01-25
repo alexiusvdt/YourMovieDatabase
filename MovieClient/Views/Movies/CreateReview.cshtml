@@ -14,11 +14,13 @@
 
     @Html.LabelFor(model => model.Text)
     @Html.TextBoxFor(model => model.Text)
+    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger", @style = "font-weight = 600;" })
 
     @Html.LabelFor(model => model.Rating)
     @Html.EditorFor(model => model.Rating)
-
-
+    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger", @style = "font-weight = 600;" })
 
     <input type="submit" value="Save" />
 }
+    
+    

@@ -11,8 +11,8 @@ using MovieClient.Models;
 namespace MovieClient.Migrations
 {
     [DbContext(typeof(MovieClientContext))]
-    [Migration("20230125182044_ReviewDBId")]
-    partial class ReviewDBId
+    [Migration("20230125230716_Validation")]
+    partial class Validation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -238,9 +238,6 @@ namespace MovieClient.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MovieId")
-                        .HasColumnType("int");
-
                     b.Property<int>("NumberOfRatings")
                         .HasColumnType("int");
 
@@ -266,8 +263,9 @@ namespace MovieClient.Migrations
 
             modelBuilder.Entity("MovieClient.Models.Review", b =>
                 {
-                    b.Property<string>("ReviewId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
@@ -276,6 +274,7 @@ namespace MovieClient.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("UserId")
