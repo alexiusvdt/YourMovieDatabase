@@ -6,6 +6,7 @@ namespace MovieClient.Models
   public class MovieClientContext : IdentityDbContext<ApplicationUser>
   {
     public DbSet<Movie> Movies { get; set; }
+    public DbSet<User> Users { get; set; }
     public DbSet<UserMovie> UserMovies { get; set; }
 
     public MovieClientContext(DbContextOptions options) : base(options) { }
@@ -26,6 +27,12 @@ namespace MovieClient.Models
     //     new Movie { MovieId = 11, UserId = 2, ApiReferenceId = 2135, Rating = 5, Genre = "Action", Title = "2 Troll 2 Furious", Overview = "Nilbog is Goblin backwards?!", ReleaseDate = "1/1/1970", Poster = "", Review = "It good" },
     //     new Movie { MovieId = 13, UserId = 2, ApiReferenceId = 13503, Rating = 5, Genre = "Thriller", Title = "Goblins vs Trolls", Overview = "Nilbog is Goblin backwards?!", ReleaseDate = "1/1/1970", Poster = "", Review = "It good" }
     //   );
+    // }
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     modelBuilder.Entity<Movie>()
+    //                 .Property(p => p.Id)
+    //                 .HasColumnName("TMDBId");
     // }
   }
 }

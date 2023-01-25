@@ -3,6 +3,8 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using MovieClient.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MovieClient.Models
 {
@@ -10,23 +12,16 @@ namespace MovieClient.Models
   {
     public int MovieId { get; set; }
     public int Id { get; set; } 
-
-    //need to add logic to parse JSON "name" keys to string[], ignoring "id" keys
     public List<Genre> Genres { get; set; }
-    // public string[] Genres { get; set; }
     public string Title { get; set; }
     public string Overview { get; set; }
     public string Release_Date { get; set; }
     public string Poster_Path { get; set; }
-    // we add reviews
     public string Review { get; set; }
-    // // add logic to dynamically change this
-    // public int Rating { get; set; }
-    // public int NumberOfRatings { get; set; }
-    // public int UserId { get; set; }
+    public int Rating { get; set; }
+    public int NumberOfRatings { get; set; }
+    public UserMovie joinEntity { get; set; }
 
-      // NumberOfRatings += 1;
-      // Rating = (Rating + Rating) / NumberOfRatings;
 
 
     public static List<Movie> GetMovies(string api_key)
