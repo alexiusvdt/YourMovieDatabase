@@ -24,15 +24,15 @@
   </div>
 
   <div class="col-sm-8 align-self-center">
-    <h2 class="display-5">@Model.Title</h2>
+    <h2 class="title">@Model.Title</h2>
     <p class="lead">Release Date: @Model.Release_Date</p>
     @foreach (Genre genre in Model.Genres)
     {
-      <li>@genre.Name</li>
+      <span class="genre">@genre.Name</span>
     }
-    <blockquote class="blockquote text-justify">
-      <p>@Model.Overview</p>
-    </blockquote>
+    <p class="desc text-justify">
+      @Model.Overview
+    </p>
 
     <div class="card" style="width: 75%; margin: auto;">
       <div class="card-header">

@@ -11,12 +11,16 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Index">Movies</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="AdvSearch">Advanced Search</a>
+                        </li>
 
                         @if (User.Identity.IsAuthenticated)
                         {
                         <li class="nav-item">
                           <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Hello @User.Identity.Name!</a>
                         </li>
+                        
                         @using (Html.BeginForm("LogOff", "Account"))
                         {
                           <input type="submit" class="btn" value="Log out">
@@ -31,7 +35,8 @@
                 <!-- <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between"> -->
                     @using (Html.BeginForm("Search", "Movies", FormMethod.Get))
                     {
-                        @Html.TextBox("query", "", new { @class = "form-control" }) <input type="submit" value="Search">
+                        @Html.TextBox("query", "", new { @class = "nav-search" }) 
+                        <input type="submit" value="Search" class="nav-search">
                     }
                 <!-- </div> -->
             </div>

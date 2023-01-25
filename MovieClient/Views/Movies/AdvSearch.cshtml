@@ -5,7 +5,20 @@
 
 @using MovieClient.Models
 
-<h1>Search Results</h1>
+<h1>Advanced Search</h1>
+
+@using (Html.BeginForm("", "Movies"))
+{
+    @Html.Label("Select parameter")
+    @Html.DropDownList("param", new List<SelectListItem>
+    {
+        new SelectListItem{ Text="Genre", Value = "0"},
+        new SelectListItem{ Text="Actor", Value = "1"}
+    })
+    @Html.TextBox("query", "") 
+
+    <input type="submit" value="Search" />
+}
 
 <div class="container-movie">
 

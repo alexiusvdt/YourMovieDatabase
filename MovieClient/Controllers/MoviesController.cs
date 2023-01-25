@@ -76,7 +76,21 @@ namespace MovieClient.Controllers
 
     public IActionResult Search(string query)
     {
-      return View(Movie.GetBasicSearch(query, _apikey));
+      if (query != null)
+      {
+        return View(Movie.GetBasicSearch(query, _apikey));
+      }
+      else
+      {
+        //add error message
+        return RedirectToAction("Index");
+      }
+    } 
+    
+    [HttpGet, ActionName("AdvSearch")]
+    public IActionResult AdvSearch(string param, string query)
+    {
+      return View(Movie.GetAdvSearch(param, query, _apikey));
     } 
   }
 }
