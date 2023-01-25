@@ -26,7 +26,6 @@ namespace MovieClient.Controllers
         return View(Movie.GetMovies(_apikey));
     }
 
-    // gets invoked when someone tries to create a review for a movie on movie details page
     [HttpPost]
     public ActionResult CreateOrUpdate(Movie movie, int MovieId)
     {
