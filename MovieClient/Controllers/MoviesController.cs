@@ -8,6 +8,7 @@ using System.Security.Claims;
 
 namespace MovieClient.Controllers
 {
+  [Authorize]
   public class MoviesController : Controller
   {
     private readonly string _apikey;
@@ -67,12 +68,32 @@ namespace MovieClient.Controllers
 
       User thisUser = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
 
-      // currentUser.Id changed to 
       _db.UserMovies.Add(new UserMovie() { MovieId = inputId, UserId = thisUser.UserId});
       _db.SaveChanges();
 
-      return RedirectToAction("Details", new { id = inputId});
+      return RedirectToAction("Index");
     }
+
+    public IActionResult Search(string query)
+    {
+      if (query != null)
+      {
+        return View(Movie.GetBasicSearch(query, _apikey));
+      }
+      else
+      {
+        //add error message
+        return RedirectToAction("Index");
+      }
+    } 
+    
+    [HttpGet, ActionName("AdvSearch")]
+    public IActionResult AdvSearch(string param, string query)
+    {
+      return View(Movie.GetAdvSearch(param, query, _apikey));
+    } 
+  }
+}
 
     // [HttpPost]
     // public ActionResult RemoveFromUser (int id)
@@ -83,7 +104,4 @@ namespace MovieClient.Controllers
     //   _db.UserMovies.Remove(joinEntry);
     //   _db.SaveChanges();
 
-    //   return RedirectToAction("Details", new { id = id});
-    // }
-  }
-}
+    //  

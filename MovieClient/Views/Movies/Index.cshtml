@@ -2,43 +2,34 @@
     ViewData["Title"] = "Home Page";
     Layout = "_Layout";
 }
-@foreach (Movie movie in Model)
-{
-    <div class="poster">
-    @*<li>@Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})</li>
-    <br>*@
-    <div class="poster">  
-    @{
-        string movie_link = @Url.Action("Details", "Movies", new {id = movie.Id});
-        string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.Poster_Path}";
+
+@using MovieClient.Models
+<div class="container-movie">
+
+    @foreach (Movie movie in Model)
+    {
+        <div class="poster">  
+        @{
+            string movie_link = @Url.Action("Details", "Movies", new {id = movie.Id});
+            string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.Poster_Path}";
+        }
+    
+            <a href=@movie_link>
+            
+            <div class="poster-image">
+                <img src="@Url.Content(poster_src)" alt="Logo">
+                @*<figcaption>
+                    <h5>test</h5>
+                </figcaption>*@
+            </div>
+
+            
+            <div class="title-info">
+                <blockquote class="blockquote text-justify">
+                    @Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})
+                </blockquote>  
+            </div>
+        </div>
     }
-    @*<a href=@movie_link>*@
-    <img src="@Url.Content(poster_src)" alt="Logo" width="175" height="auto">
-    <div class="title-info">
-        <blockquote class="blockquote text-justify">
-            @Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})
-        </blockquote>
+</div>
 
-        <a href=@movie_link>
-
-
-        <div class="poster-image">
-            <img src="@Url.Content(poster_src)" alt="Logo" width="175" height="auto">
-            @*<figcaption>
-                <h5>test</h5>
-            </figcaption>*@
-        </div>
-
-
-    </div>
-        <div class="title-info">
-            <blockquote class="blockquote text-justify">
-                @Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})
-            </blockquote>  
-        </div>
-
-    </div>
-
-    @*@Html.ActionImage("Details", new id = movie.Id), "@Url.Content(poster_src)", "Details")*@
-
-}

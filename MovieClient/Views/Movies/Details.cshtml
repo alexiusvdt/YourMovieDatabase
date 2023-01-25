@@ -1,28 +1,53 @@
 @{
   ViewData["Title"] = $"Details for {@Model.Title}";
+  Layout = "_Layout";
 }
 
 @using MovieClient.Models
 @model MovieClient.Models.Movie
 
 @{
-string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Poster_Path}";
+  string poster_src = "";
+    if (Model.Poster_Path == null)
+    {
+      poster_src = "https://www.altavod.com/assets/images/poster-placeholder.png";
+    }
+    else
+    {
+      poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Poster_Path}";
+    }
 }
-<img src="@Url.Content(poster_src)" alt="Logo" width="100" height="150" />
-<h1>@Model.Title</h1>
-<li>@Model.Overview</li>
-<li>@Model.Release_Date</li>
 
-@foreach (Genre genre in Model.Genres)
-{
-  <li>@genre.Name</li>
-}
+<div class="row">
+  <div class="col-sm-3 align-self-start">
+  <img src="@Url.Content(poster_src)" alt="Movie poster" width="275" class="img-fluid mx-auto img-thumbnail"/>
+  </div>
 
-@* @Html.ActionLink("Mark as watched", "AddToUser", "Movies", new { id = @Model.Id}); *@
+  <div class="col-sm-8 align-self-center">
+    <h2 class="title">@Model.Title</h2>
+    <p class="lead">Release Date: @Model.Release_Date</p>
+    @foreach (Genre genre in Model.Genres)
+    {
+      <span class="genre">@genre.Name</span>
+    }
+    <p class="desc text-justify">
+      @Model.Overview
+    </p>
 
-
-@using (Html.BeginForm("AddToUser", "Movies"))
-{
-  @Html.Hidden("inputId", Model.Id)
-  <input type="submit" value="Mark as watched"/>
-}
+    <div class="card" style="width: 75%; margin: auto;">
+      <div class="card-header">
+        <h5 class="card-title">User Actions</h5>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Rate / Review</li>
+          @using (Html.BeginForm("AddToUser", "Movies"))
+          {
+            @Html.Hidden("inputId", Model.Id)
+            <input type="submit" value="Mark as watched"/>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

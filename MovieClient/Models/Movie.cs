@@ -46,10 +46,37 @@ namespace MovieClient.Models
       return movie;
     }
 
-    // public static void Put(Movie movie)
-    // {
-    //   string jsonMovie = Jsonconvert.SerializeObject(movie);
-    //   ApiHelper.Put(movie.MovieId, jsonMovie);
-    // }
-  }
+    public static List<Movie> GetBasicSearch(string query, string apiKey)
+    {
+      var apiCallTask = ApiHelper.BasicSearch(apiKey, query);
+      var result = apiCallTask.Result;
+
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      List<Movie> resultsList = JsonConvert.DeserializeObject<List<Movie>>(jsonResponse["results"].ToString());
+      return resultsList;
+    }
+  
+    public static List<Movie> GetAdvSearch(string param, string query, string apiKey)
+    {    
+      // switch(dropdown/select) 
+      // {
+      //   case x:
+      //     // code block
+      //     break;
+      //   case y:
+      //     // code block
+      //     break;
+      //   default:
+      //     // code block
+      //     break;
+      // }
+     
+      var apiCallTask = ApiHelper.GetAdvSearch(apiKey, param, query);
+      var result = apiCallTask.Result;
+
+      JObject jsonResponse = JsonConvert.DeserializeObject<JObject>(result);
+      List<Movie> resultsList = JsonConvert.DeserializeObject<List<Movie>>(jsonResponse["results"].ToString());
+      return resultsList;
+    }
+  } 
 }
