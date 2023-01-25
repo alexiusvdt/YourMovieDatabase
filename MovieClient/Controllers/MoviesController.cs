@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MovieClient.Models;
 using MovieClient.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace MovieClient.Controllers
 {
@@ -25,12 +26,6 @@ namespace MovieClient.Controllers
         return View(Movie.GetMovies(_apikey));
     }
 
-    // public ActionResult Create()
-    // {
-    //   return View();
-    // }
-
-    // gets invoked when someone tries to create a review for a movie on movie details page
     [HttpPost]
     public ActionResult CreateOrUpdate(Movie movie, int MovieId)
     {
@@ -55,7 +50,6 @@ namespace MovieClient.Controllers
     {
       Movie movie = Movie.GetDetails(id, _apikey);
 
-      // IF movie does not exist, take new movie object, add to db
       if ((_db.Movies.FirstOrDefault(entry => movie.Id == entry.Id)) == null)
       {
         _db.Movies.Add(movie);
@@ -65,37 +59,31 @@ namespace MovieClient.Controllers
       return View(movie);
     }
 
-    // public ActionResult Edit(int id)
-    // {
-    //   Movie movie = Movie.GetDetails(id);
-    //   return View(movie);
-    // }
+    [HttpPost]
+    public async Task<ActionResult> AddToUser (int inputId)
+    { 
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+
+      User thisUser = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
+
+      // currentUser.Id changed to 
+      _db.UserMovies.Add(new UserMovie() { MovieId = inputId, UserId = thisUser.UserId});
+      _db.SaveChanges();
+
+      return RedirectToAction("Details", new { id = inputId});
+    }
 
     // [HttpPost]
-    // public ActionResult Edit(Movie movie)
-    // {
-    //   Movie.Put(movie);
-    //   return RedirectToAction("Details", new { id = movie.MovieId });
-    // }
+    // public ActionResult RemoveFromUser (int id)
+    // { 
+    //   string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    //   ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+    //   UserMovie joinEntry = _db.UserMovies.FirstOrDefault(entry => entry.MovieId == id && entry.UserId == currentUser.Id);
+    //   _db.UserMovies.Remove(joinEntry);
+    //   _db.SaveChanges();
 
-    // public ActionResult Delete(int id)
-    // {
-    //   Movie movie = Movie.GetDetails(id);
-    //   return View(movie);
-    // }
-
-    // [HttpPost, ActionName("Delete")]
-    // public ActionResult DeleteConfirmed(int id)
-    // {
-    //   Movie.Delete(id);
-    //   return RedirectToAction("Index");
-    // }
-
-    // [HttpPost]
-    // public ActionResult AddMovie(Tag tag, int movieId) // Tag being Movie category to add movie to
-    // {
-    //   #nullable enable
-    //   UserMovies? joinEntity = // API call??????
+    //   return RedirectToAction("Details", new { id = id});
     // }
   }
 }
