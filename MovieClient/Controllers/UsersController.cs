@@ -8,32 +8,24 @@ using MovieClient.Models;
 
 namespace MovieClient.Controllers
 {
-    public class HomeController : Controller
+    public class UsersController : Controller
     {
         private readonly MovieClientContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager, MovieClientContext db)
+        public UsersController(UserManager<ApplicationUser> userManager, MovieClientContext db)
         {
         _userManager = userManager;
         _db = db;
         }
 
-        [HttpGet("/")]
         public async Task<ActionResult> Index()
         {
-        return View();
-        }
+          var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;  
+          var currentUser = await _userManager.FindByIdAsync(userId);
 
-        // [HttpGet("/privacy")]
-        // public async Task<ActionResult> Privacy()
-        // {
-        // return View();
-        // }
-
-        public ActionResult Index()
-        {
-            return View();
+          User user = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
+          return View(user);
         }
     }
 }

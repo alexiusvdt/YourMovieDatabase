@@ -213,7 +213,7 @@ namespace MovieClient.Migrations
 
             modelBuilder.Entity("MovieClient.Models.Genre", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("GenreId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -223,7 +223,7 @@ namespace MovieClient.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.HasKey("GenreId");
 
                     b.HasIndex("MovieId");
 
@@ -239,11 +239,17 @@ namespace MovieClient.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
+                    b.Property<int>("NumberOfRatings")
+                        .HasColumnType("int");
+
                     b.Property<string>("Overview")
                         .HasColumnType("longtext");
 
                     b.Property<string>("Poster_Path")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
 
                     b.Property<string>("Release_Date")
                         .HasColumnType("longtext");
@@ -259,14 +265,33 @@ namespace MovieClient.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("MovieClient.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("MoviesWatched")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserAccountId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("UserAccountId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("MovieClient.Models.UserMovie", b =>
                 {
                     b.Property<int>("UserMovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
@@ -276,9 +301,10 @@ namespace MovieClient.Migrations
 
                     b.HasKey("UserMovieId");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("MovieId")
+                        .IsUnique();
 
-                    b.HasIndex("MovieId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserMovies");
                 });
@@ -341,26 +367,44 @@ namespace MovieClient.Migrations
                         .HasForeignKey("MovieId");
                 });
 
+            modelBuilder.Entity("MovieClient.Models.User", b =>
+                {
+                    b.HasOne("MovieClient.Models.ApplicationUser", "UserAccount")
+                        .WithMany()
+                        .HasForeignKey("UserAccountId");
+
+                    b.Navigation("UserAccount");
+                });
+
             modelBuilder.Entity("MovieClient.Models.UserMovie", b =>
                 {
-                    b.HasOne("MovieClient.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("MovieClient.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieId")
+                        .WithOne("joinEntity")
+                        .HasForeignKey("MovieClient.Models.UserMovie", "MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.HasOne("MovieClient.Models.User", "User")
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Movie");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MovieClient.Models.Movie", b =>
                 {
                     b.Navigation("Genres");
+
+                    b.Navigation("joinEntity");
+                });
+
+            modelBuilder.Entity("MovieClient.Models.User", b =>
+                {
+                    b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618
         }
