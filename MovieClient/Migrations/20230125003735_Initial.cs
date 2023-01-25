@@ -221,6 +221,30 @@ namespace MovieClient.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    MoviesWatched = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    UserAccountId = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.UserId);
+                    table.ForeignKey(
+                        name: "FK_Users_AspNetUsers_UserAccountId",
+                        column: x => x.UserAccountId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Genre",
                 columns: table => new
                 {
@@ -248,23 +272,22 @@ namespace MovieClient.Migrations
                     UserMovieId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     MovieId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "varchar(255)", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserMovies", x => x.UserMovieId);
                     table.ForeignKey(
-                        name: "FK_UserMovies_AspNetUsers_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
                         name: "FK_UserMovies_Movies_MovieId",
                         column: x => x.MovieId,
                         principalTable: "Movies",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserMovies_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -312,15 +335,20 @@ namespace MovieClient.Migrations
                 column: "MovieId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserMovies_ApplicationUserId",
-                table: "UserMovies",
-                column: "ApplicationUserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserMovies_MovieId",
                 table: "UserMovies",
                 column: "MovieId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMovies_UserId",
+                table: "UserMovies",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserAccountId",
+                table: "Users",
+                column: "UserAccountId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -350,10 +378,13 @@ namespace MovieClient.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Movies");
 
             migrationBuilder.DropTable(
-                name: "Movies");
+                name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

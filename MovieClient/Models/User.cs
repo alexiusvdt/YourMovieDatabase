@@ -10,7 +10,6 @@ namespace MovieClient.Models
     // in the Update ApplicationUser controller, we do user.moviesWatched += movie + ", "
     public string MoviesWatched { get; set; }
     public string Name { get; set; }
-    public UserMovie joinEntity { get; set; }
     public List<UserMovie> JoinEntities { get; }
     public ApplicationUser UserAccount { get; set; }
   }

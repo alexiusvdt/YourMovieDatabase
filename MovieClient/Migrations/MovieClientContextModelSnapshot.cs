@@ -265,14 +265,33 @@ namespace MovieClient.Migrations
                     b.ToTable("Movies");
                 });
 
+            modelBuilder.Entity("MovieClient.Models.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("MoviesWatched")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserAccountId")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("UserAccountId");
+
+                    b.ToTable("Users");
+                });
+
             modelBuilder.Entity("MovieClient.Models.UserMovie", b =>
                 {
                     b.Property<int>("UserMovieId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
@@ -282,10 +301,10 @@ namespace MovieClient.Migrations
 
                     b.HasKey("UserMovieId");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("MovieId")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("UserMovies");
                 });
@@ -348,21 +367,32 @@ namespace MovieClient.Migrations
                         .HasForeignKey("MovieId");
                 });
 
+            modelBuilder.Entity("MovieClient.Models.User", b =>
+                {
+                    b.HasOne("MovieClient.Models.ApplicationUser", "UserAccount")
+                        .WithMany()
+                        .HasForeignKey("UserAccountId");
+
+                    b.Navigation("UserAccount");
+                });
+
             modelBuilder.Entity("MovieClient.Models.UserMovie", b =>
                 {
-                    b.HasOne("MovieClient.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
                     b.HasOne("MovieClient.Models.Movie", "Movie")
                         .WithOne("joinEntity")
                         .HasForeignKey("MovieClient.Models.UserMovie", "MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.HasOne("MovieClient.Models.User", "User")
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Movie");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MovieClient.Models.Movie", b =>
@@ -370,6 +400,11 @@ namespace MovieClient.Migrations
                     b.Navigation("Genres");
 
                     b.Navigation("joinEntity");
+                });
+
+            modelBuilder.Entity("MovieClient.Models.User", b =>
+                {
+                    b.Navigation("JoinEntities");
                 });
 #pragma warning restore 612, 618
         }

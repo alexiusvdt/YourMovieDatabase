@@ -17,6 +17,8 @@ string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{Model.Pos
   <li>@genre.Name</li>
 }
 
+@Html.ActionLink("Mark as watched", "AddToUser", "Movies", new { id = @Model.Id});
+
 
 @* @using (Html.BeginForm("CreateOrUpdate", "Movies"))
 {
