@@ -20,13 +20,18 @@
 
 <div class="row">
   <div class="col-sm-3 align-self-start">
-  <img src="@Url.Content(poster_src)" alt="Movie poster" width="275" class="img-fluid mx-auto img-thumbnail"/>
+  <img src="@Url.Content(poster_src)" alt="Movie poster" width="275" class="img-fluid mx-auto img-thumbnail"/><br>
+            @using (Html.BeginForm("AddToUser", "Movies"))
+          {
+            @Html.Hidden("inputId", Model.Id)
+      <div style="text-align: center;"><input type="submit" value="Mark as watched"
+          class="btn btn my-2 my-sm-2 btn-outline-dark" /></div>
+          }
   </div>
 
   <div class="col-sm-8 align-self-center">
     <h2 class="title">@Model.Title</h2>
     <p class="lead">Release Date: @Model.Release_Date</p>
-    <p>Rating: @ViewBag.movieReviews.Rating/10</p>
     @foreach (Genre genre in Model.Genres)
     {
       <span class="genre">@genre.Name</span>
@@ -34,27 +39,23 @@
     <p class="desc text-justify">
       @Model.Overview
     </p>
+    <p>You've rated this movie @ViewBag.movieReviews.Rating/10</p>
 
-    <div class="card" style="width: 75%; margin: auto;">
+    <div class="card" style="width: 85%; margin: auto;">
       <div class="card-header">
-        <h5 class="card-title">User Actions</h5>
+        <h5 class="card-title">User Reviews</h5>
       </div>
-      <div class="card-body">
+      @* <div class="card-body"> *@
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Rate / Review</li>
           @using (Html.BeginForm("AddToUser", "Movies"))
-          {
-            @Html.Hidden("inputId", Model.Id)
-            <input type="submit" value="Mark as watched"/>
-          }
         </ul>
-        @Html.ActionLink("Review", "CreateReview", "Movies", new { inputId = Model.Id})
+        <h4> &nbsp;&nbsp; @Html.ActionLink("Review", "CreateReview", "Movies", new { inputId = Model.Id})</h4>
         @if(@ViewBag.movieReviews.Reviews != null)
         {
         <ul>
           @foreach (Review review in @ViewBag.movieReviews.Reviews)
           {
-          <li>@review.Text</li>            
+          <blockquote>@review.Text</blockquote>        
           }
         </ul>
         }

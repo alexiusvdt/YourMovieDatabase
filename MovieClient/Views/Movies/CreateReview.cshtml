@@ -8,19 +8,22 @@
 @{
   int num = ViewBag.MovieId;
 }
+<div style="text-align: center;">
+  <h2>Add a review for [movie title]</h2>
 @using (Html.BeginForm("CreateReview", "Movies"))
 {
     @Html.Hidden("MovieId", num)
 
     @Html.LabelFor(model => model.Text)
     @Html.TextBoxFor(model => model.Text)
-    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger", @style = "font-weight = 600;" })
+    @Html.ValidationMessageFor(model => model.Text, "", new { @class = "text-danger", @style = "font-weight = 600;" })<br>
 
     @Html.LabelFor(model => model.Rating)
     @Html.EditorFor(model => model.Rating)
-    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger", @style = "font-weight = 600;" })
+    @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger", @style = "font-weight = 600;" })<br>
 
-    <input type="submit" value="Save" />
+  <input type="submit" value="Save" class="btn btn my-2 my-sm-2 btn-outline-dark"/>
 }
+</div>
     
     
