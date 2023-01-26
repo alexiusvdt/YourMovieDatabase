@@ -12,6 +12,14 @@ flex-flow: row wrap;
   padding-bottom: 30px;
 } */
 
+.container {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.navbar, .navbar-expand-sm, .navbar-toggleable-sm, .navbar-light {
+  margin-bottom: 0px;
+}
 
 .container-movie {
   display: flex;
@@ -21,6 +29,16 @@ flex-flow: row wrap;
   padding: 10px 10px 10px;
   background-color: rgba(236, 227, 209, 0.888);
   padding-bottom: 30px;
+}
+
+.container-home {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  flex: 6;
+  padding: 10px 10px 10px;
+  background-color: rgba(236, 227, 209, 0.888);
+  width: 100%;
 }
 
 .poster-image {
@@ -180,8 +198,12 @@ flex-flow: row wrap;
   text-transform: none;
 }
 
+h1, h2, h3, h4 {
+  font-family: 'Bitter', sans-serif;
+}
+
 .navbar-brand {
-  font-family: 'Bitter', serif;
+  font-family: 'Vidaloka', serif;
   font-weight: 600;
   text-transform: uppercase;
   font-size: 2rem;
@@ -205,8 +227,20 @@ flex-flow: row wrap;
 }
 
 .btn-sm {
-  width: 65px;
   height: 30px;
   border: transparent;
   background-color: antiquewhite;
+}
+
+input {
+  margin-bottom: 1rem;
+  /* margin: 10px 10px 10px; */
+}
+
+label {
+  font-weight: 300;
+  padding: 5px;
+  margin: 10px 5px 5px 10px;
+  width: 200px;
+  text-align: justify;
 }

@@ -6,7 +6,8 @@
 
 @model RegisterViewModel
 
-<h2>Register a new user</h2>
+<div style="text-align: center">
+<h2 class="title">Register a new user</h2>
 <hr />
 
 @if(!ViewData.ModelState.IsValid) 
@@ -15,23 +16,25 @@
 }
 
 <!-- api contact method needed? -->
+<div class="form-group">
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
   @Html.LabelFor(user=> user.Name)
-  @Html.EditorFor(user=> user.Name)
+  @Html.EditorFor(user=> user.Name)<br>
 
   @Html.LabelFor(user => user.Email)
-  @Html.TextBoxFor(user=> user.Email)
+  @Html.TextBoxFor(user=> user.Email)<br>
 
   @Html.LabelFor(user=> user.Password)
-  @Html.EditorFor(user=> user.Password)
+  @Html.EditorFor(user=> user.Password)<br>
 
   @Html.LabelFor(user=> user.ConfirmPassword)
-  @Html.EditorFor(user=> user.ConfirmPassword)
+  @Html.EditorFor(user=> user.ConfirmPassword)<br>
 
   //image uploader?
 
-  <input type="submit" class="btn btn-sm my-2 my-sm-2 btn-outline-dark" value="Register" />
+    <input type="submit" class="btn btn my-2 my-sm-2 btn-outline-dark" value="Register" />
 }
+</div>
 
-<p>@Html.ActionLink("Back to accounts page", "Index")</p>
+<p style="text-align: center">@Html.ActionLink("Back to accounts page", "Index")</p>
