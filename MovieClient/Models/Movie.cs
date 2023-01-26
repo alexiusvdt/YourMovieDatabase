@@ -10,14 +10,13 @@ namespace MovieClient.Models
 {
   public class Movie
   {
-    public int MovieId { get; set; }
     public int Id { get; set; } 
     public List<Genre> Genres { get; set; }
     public string Title { get; set; }
     public string Overview { get; set; }
     public string Release_Date { get; set; }
     public string Poster_Path { get; set; }
-    public string Review { get; set; }
+    public List<Review> Reviews { get; set; }
     public int Rating { get; set; }
     public int NumberOfRatings { get; set; }
     public UserMovie joinEntity { get; set; }

@@ -6,6 +6,7 @@ using MovieClient.Models;
 using MovieClient.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieClient.Controllers
 {
@@ -28,26 +29,6 @@ namespace MovieClient.Controllers
         return View(Movie.GetMovies(_apikey));
     }
 
-    [HttpPost]
-    public ActionResult CreateOrUpdate(Movie movie, int MovieId)
-    {
-      // IF movie does not exist, take new movie object, add to db
-      // if ((_db.Movies.FirstOrDefault(entry => movie.MovieId == entry.MovieId)) == null)
-      // {
-      //   _db.Movies.Add(movie);
-      //   _db.SaveChanges();
-      // }
-      
-      // check IF movie does exist, _db.Update(movie), redirect to details page
-      // movie.Review = movie.Review;
-      movie.Rating = (movie.Rating + movie.Rating) / movie.NumberOfRatings;
-      movie.NumberOfRatings += 1;
-      _db.Update(movie);
-      _db.SaveChanges();
-
-      return RedirectToAction("Details", new { id = movie.MovieId });
-    }
-
     public IActionResult Details(int id)
     {
       Movie movie = Movie.GetDetails(id, _apikey);
@@ -57,6 +38,8 @@ namespace MovieClient.Controllers
         _db.Movies.Add(movie);
         _db.SaveChanges();
       }
+
+      ViewBag.movieReviews = _db.Movies.Include(review => review.Reviews).FirstOrDefault(entry => entry.Id == id);
 
       return View(movie);
     }
@@ -69,8 +52,15 @@ namespace MovieClient.Controllers
 
       User thisUser = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
 
-      _db.UserMovies.Add(new UserMovie() { MovieId = inputId, UserId = thisUser.UserId});
-      _db.SaveChanges();
+      #nullable enable
+      UserMovie? joinEntity = _db.UserMovies.FirstOrDefault(entry => (entry.MovieId == inputId) && (entry.UserId == thisUser.UserId));
+      #nullable disable
+
+      if (joinEntity == null && thisUser.UserId != 0)
+      {
+        _db.UserMovies.Add(new UserMovie() { MovieId = inputId, UserId = thisUser.UserId});
+        _db.SaveChanges();
+      }
 
       return RedirectToAction("Index");
     }
@@ -110,6 +100,47 @@ namespace MovieClient.Controllers
       //                       .ToList();
       return View(thisUser);
 
+    }
+
+    public ActionResult CreateReview (int inputId)
+    {
+      
+      Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == inputId);
+      ViewBag.MovieId = movie.Id;
+      ViewBag.MovieTitle = movie.Title;
+
+      return View();
+      
+    }
+
+    [HttpPost]
+    public async Task<ActionResult> CreateReview (Review review, int MovieId)
+    {
+      if (!ModelState.IsValid)
+      {
+        Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == MovieId);
+        ViewBag.MovieId = movie.Id;
+        ViewBag.MovieTitle = movie.Title;
+        return View(review);
+      }
+      else
+      {
+      Movie movie = _db.Movies.FirstOrDefault(movie => movie.Id == review.MovieId);
+
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      User thisUser = _db.Users.FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
+      review.UserId = thisUser.UserId;
+
+      _db.Reviews.Add(review);
+
+      movie.NumberOfRatings = movie.NumberOfRatings + 1;
+      movie.Rating = (movie.Rating + review.Rating) / movie.NumberOfRatings;
+
+      _db.Movies.Update(movie);
+      _db.SaveChanges();
+      return RedirectToAction("Details", new { id = movie.Id });
+      }
     }
   }
 }

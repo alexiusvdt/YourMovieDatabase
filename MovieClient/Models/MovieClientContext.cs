@@ -8,6 +8,8 @@ namespace MovieClient.Models
     public DbSet<Movie> Movies { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<UserMovie> UserMovies { get; set; }
+    public DbSet<Review> Reviews { get; set; }
+
 
     public MovieClientContext(DbContextOptions options) : base(options) { }
   }

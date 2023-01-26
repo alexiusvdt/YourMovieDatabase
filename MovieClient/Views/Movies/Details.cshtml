@@ -26,6 +26,7 @@
   <div class="col-sm-8 align-self-center">
     <h2 class="title">@Model.Title</h2>
     <p class="lead">Release Date: @Model.Release_Date</p>
+    <p>Rating: @ViewBag.movieReviews.Rating/10</p>
     @foreach (Genre genre in Model.Genres)
     {
       <span class="genre">@genre.Name</span>
@@ -47,6 +48,16 @@
             <input type="submit" value="Mark as watched"/>
           }
         </ul>
+        @Html.ActionLink("Review", "CreateReview", "Movies", new { inputId = Model.Id})
+        @if(@ViewBag.movieReviews.Reviews != null)
+        {
+        <ul>
+          @foreach (Review review in @ViewBag.movieReviews.Reviews)
+          {
+          <li>@review.Text</li>            
+          }
+        </ul>
+        }
       </div>
     </div>
   </div>
