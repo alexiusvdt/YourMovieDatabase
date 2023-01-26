@@ -41,9 +41,6 @@ When logged in, a user can:
 * Add a personal rating and/or review to a movie
 * Create, view, update, and delete personal lists
 
-#### Database Schema
-
-
 
 ### API Integration
 
@@ -86,7 +83,7 @@ dotnet tool install --global dotnet-ef --version 6.0.0
 ```
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=sillystringz_factory;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];",
+    "DefaultConnection": "Server=localhost;Port=3306;database=movie_database;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];",
   }
 }
 ```
@@ -96,7 +93,7 @@ dotnet tool install --global dotnet-ef --version 6.0.0
 dotnet ef database update
 ```
 
-5. Install dependencies within the `Factory` directory
+5. Install dependencies within the `MovieClient` directory
 ```
 $ dotnet restore
 ````
@@ -110,7 +107,7 @@ $ dotnet restore
 
 
 # Running the program
-* Start the API by opening a command line in the `MovieApi` directory and enter `dotnet run`
+* Start the client by opening a command line in the `MovieClient` directory and enter `dotnet run`
 
 
 
