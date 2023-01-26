@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+@model MovieClient.Models.User
+@using MovieClient.Models
+
+<p>@Html.ActionLink("Back to Movies", "Index")</p>
+
+<div class="container2">
+@foreach(UserMovie join in Model.JoinEntities)
+{
+  <div class="container-my-movie">
+    @{
+      string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{join.Movie.Poster_Path}";
+    }
+    <div class="my-poster-image">
+      <img src="@Url.Content(poster_src)" alt="Logo">
+    </div>
+    <div class="my-movie-info">
+      <blockquote class="blockquote text-justify">
+          <div class="title">
+            <p>@join.Movie.Title</p>
+          </div>
+          <hr>
+          <div class="overview">
+            <p>@join.Movie.Overview</p>
+          </div>
+      </blockquote>  
+    </div>
+  </div>
+}
+</div>

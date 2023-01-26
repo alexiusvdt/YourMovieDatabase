@@ -25,10 +25,10 @@ namespace MovieClient.Controllers
         return View();
         }
 
-        // [HttpGet("/privacy")]
-        // public async Task<ActionResult> Privacy()
-        // {
-        // return View();
-        // }
+        [HttpGet("/privacy")]
+        public async Task<ActionResult> Privacy()
+        {
+        return View();
+        }
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using MovieClient.Models;
 using MovieClient.ViewModels;
+using System.Security.Claims;
 
 namespace MovieClient.Controllers
 {

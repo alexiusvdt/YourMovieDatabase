@@ -12,3 +12,4 @@ namespace MovieClient.Models
     public ApplicationUser UserAccount { get; set; }
   }
 }
+

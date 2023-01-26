@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using MovieClient.Models;
 using MovieClient.ViewModels;
@@ -61,7 +62,44 @@ namespace MovieClient.Controllers
         _db.SaveChanges();
       }
 
-      return RedirectToAction("Details", new { id = inputId});
+      return RedirectToAction("Index");
+    }
+
+    public IActionResult Search(string query)
+    {
+      if (query != null)
+      {
+        return View(Movie.GetBasicSearch(query, _apikey));
+      }
+      else
+      {
+        //add error message
+        return RedirectToAction("Index");
+      }
+    } 
+    
+    [HttpGet, ActionName("AdvSearch")]
+    public IActionResult AdvSearch(string param, string query)
+    {
+      return View(Movie.GetAdvSearch(param, query, _apikey));
+    } 
+
+    //new
+    public async Task<ActionResult> MyMovies()
+    {
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      User thisUser = _db.Users.Include(join => join.JoinEntities).ThenInclude(join => join.Movie).FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
+  
+      //Movie movie = Movie.GetDetails(id, _apikey);
+      // .Include(join => join.JoinEntities).ThenIncude(join => join.)
+
+
+      // List<Item> model = _db.Items
+      //                       .Include(item => item.Category)
+      //                       .ToList();
+      return View(thisUser);
+
     }
 
     public ActionResult CreateReview (int inputId)
@@ -116,5 +154,4 @@ namespace MovieClient.Controllers
     //   _db.UserMovies.Remove(joinEntry);
     //   _db.SaveChanges();
 
-    //   return RedirectToAction("Details", new { id = id});
-    // }
+    //  

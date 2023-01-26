@@ -1,10 +1,9 @@
-### Your Movie Database
-## By Alex Johnson, Aitana Shough, Jennifer Holcomb, Dominik Magic, Richard Cha
-# WIP
+# Your Movie Database
+#### By Alex Johnson, Aitana Shough, Jennifer Holcomb, Dominik Magic, Richard Cha
 
-A client for users to manage their personal movie collection(s)
+A client for users to manage their personal movie collections
 
-[Documentation](#api-documentation)
+[API Integration](#api-integration)
 
 [Project Details](#project-details)
 
@@ -46,7 +45,7 @@ When logged in, a user can:
 
 
 
-#### API Integration
+### API Integration
 
 Integration with [TheMovieDatabase API](https://developers.themoviedb.org/3/getting-started/introduction). 
 
@@ -65,86 +64,58 @@ Integration with [TheMovieDatabase API](https://developers.themoviedb.org/3/gett
 
 ## #Setup/Installation Guide
  
-# Set up the API
-* Clone the repository 
-* Navigate to the `MovieApi` folder
-* Open a command line and enter the following:
-  ```
-  dotnet add package Microsoft.EntityFrameworkCore -v 6.0.0
-  dotnet add package Pomelo.EntityFrameworkCore.MySql -v 6.0.0
-  dotnet add package Microsoft.EntityFrameworkCore.Design -v 6.0.0
-  dotnet add package RestSharp --version 108.0.3	
-  dotnet add package Newtonsoft.Json --version 13.0.2
-  dotnet ef database update
-  ```
-* add a file in the PetShelterApi directory called `appsettings.json` and add the following code, replacing the password/user field with your credentials:
+ This project may be viewed online [if we acrually host it with Azure....]. Alternatively, you may clone it to your device.
+
+ #### To run this project, you will need:
+* .NET 6.0
+[https://dotnet.microsoft.com/en-us/download](https://dotnet.microsoft.com/en-us/download)
+
+* .NET Core CLI
+```
+dotnet tool install --global dotnet-ef --version 6.0.0
+```
+
+* API Key from [TMDB](https://developers.themoviedb.org/)
+*Instructions on acquiring a free API key can be found [here](https://developers.themoviedb.org/3/getting-started/introduction).*
+
+1. Clone this repository to your workspace.
+
+2. Navigate to the `MovieClient` directory.
+
+3. Create a file named `appsettings.json` with the following code. Be sure to update the Default Connection to your MySQL credentials.
 ```
 {
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
   "ConnectionStrings": {
-    "DefaultConnection": "Server=localhost;Port=3306;database=PetShelterApi;uid=[YOUR_UID];pwd=[YOUR_PASSWORD];"
+    "DefaultConnection": "Server=localhost;Port=3306;database=sillystringz_factory;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];",
   }
 }
 ```
+
+4. Create database via Migrations
+```
+dotnet ef database update
+```
+
+5. Install dependencies within the `Factory` directory
+```
+$ dotnet restore
+````
+
+6. Build and run the program 
+ ```
+ $ dotnet run
+ ```
+
+7. Enjoy!
+
 
 # Running the program
 * Start the API by opening a command line in the `MovieApi` directory and enter `dotnet run`
 
 
-### API Documentation
-
-## Endpoints
-```
-GET http://localhost:5000/api/animals/
-GET http://localhost:5000/api/animals/{id}
-POST http://localhost:5000/api/animals/
-PUT http://localhost:5000/api/animals/{id}
-DELETE http://localhost:5000/api/animals/{id}
-```
-    
-## Query Examples
-  * The following query will return all animals with pagination enabled (first page, 5 elements per page):
-      ```
-      GET https://localhost:5001/api/Animals?PageNumber=1&PageSize=5
-      ```
-  * You may query specific entry IDs by appending it to the end:
-      ```
-      GET https://localhost:5001/api/Animals/4
-      ```
-
-  * A body is required for POST requests. Example of a good request would be:
-      ```
-      { 
-        "name": "Bongo Jones",
-        "species": "Cat",
-        "subSpecies": "Tabby",
-        "age": 3,
-      }
-      ```
-  * An ID is required for PUT requests (modifying an existing entry) including the ID of the entry:
-      ```
-      {
-        "animalId": 1,
-        "name": "Kvothe",
-        "species": "Cat",
-        "subSpecies": "Himalayan",
-        "age": 10,
-      }
-      ```
-  * To delete an entry, simply enter the id of the entry you'd like to delete:
-      ```
-      DELETE  https://localhost:5001/api/Animals/8
-      ```
-
 
 ## Known Bugs
-it doesnt work yet
+it doesnt work yet... SIKE it does now !
 
 ## Thanks
 
