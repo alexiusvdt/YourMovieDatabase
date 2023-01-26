@@ -39,7 +39,7 @@ namespace MovieClient.Controllers
         _db.SaveChanges();
       }
 
-      ViewBag.movieReviews = _db.Movies.Include(review => review.Reviews).FirstOrDefault(entry => entry.Id == id);
+      ViewBag.movieReviews = _db.Movies.Include(review => review.Reviews).ThenInclude(entry => entry.User).FirstOrDefault(entry => entry.Id == id);
 
       return View(movie);
     }
@@ -62,7 +62,7 @@ namespace MovieClient.Controllers
         _db.SaveChanges();
       }
 
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new { id = inputId });
     }
 
     public IActionResult Search(string query)
@@ -91,6 +91,7 @@ namespace MovieClient.Controllers
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
       User thisUser = _db.Users.Include(join => join.JoinEntities).ThenInclude(join => join.Movie).FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
   
+      ViewBag.UserReviews = _db.Reviews.Include(review => review.Movie).Where(entry => entry.UserId == thisUser.UserId).ToList();
       //Movie movie = Movie.GetDetails(id, _apikey);
       // .Include(join => join.JoinEntities).ThenIncude(join => join.)
 
@@ -99,7 +100,6 @@ namespace MovieClient.Controllers
       //                       .Include(item => item.Category)
       //                       .ToList();
       return View(thisUser);
-
     }
 
     public ActionResult CreateReview (int inputId)
@@ -142,16 +142,25 @@ namespace MovieClient.Controllers
       return RedirectToAction("Details", new { id = movie.Id });
       }
     }
+
+    [HttpPost]
+    public ActionResult RemoveMovieFromUser (int joinId)
+    { 
+      UserMovie joinEntry = _db.UserMovies.FirstOrDefault(entry => entry.UserMovieId == joinId);
+      _db.UserMovies.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("MyMovies");
+    }
+
+    [HttpPost]
+    public ActionResult RemoveReviewFromUser (int reviewId)
+    { 
+      Review review = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == reviewId);
+      _db.Reviews.Remove(review);
+      _db.SaveChanges();
+      return RedirectToAction("MyMovies");
+    }
   }
 }
 
-    // [HttpPost]
-    // public ActionResult RemoveFromUser (int id)
-    // { 
-    //   string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    //   ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-    //   UserMovie joinEntry = _db.UserMovies.FirstOrDefault(entry => entry.MovieId == id && entry.UserId == currentUser.Id);
-    //   _db.UserMovies.Remove(joinEntry);
-    //   _db.SaveChanges();
-
-    //  
+    

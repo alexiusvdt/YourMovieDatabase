@@ -11,8 +11,8 @@ using MovieClient.Models;
 namespace MovieClient.Migrations
 {
     [DbContext(typeof(MovieClientContext))]
-    [Migration("20230125230716_Validation")]
-    partial class Validation
+    [Migration("20230126122721_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,6 +174,9 @@ namespace MovieClient.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
@@ -322,8 +325,7 @@ namespace MovieClient.Migrations
 
                     b.HasKey("UserMovieId");
 
-                    b.HasIndex("MovieId")
-                        .IsUnique();
+                    b.HasIndex("MovieId");
 
                     b.HasIndex("UserId");
 
@@ -419,8 +421,8 @@ namespace MovieClient.Migrations
             modelBuilder.Entity("MovieClient.Models.UserMovie", b =>
                 {
                     b.HasOne("MovieClient.Models.Movie", "Movie")
-                        .WithOne("joinEntity")
-                        .HasForeignKey("MovieClient.Models.UserMovie", "MovieId")
+                        .WithMany("JoinEntities")
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -439,9 +441,9 @@ namespace MovieClient.Migrations
                 {
                     b.Navigation("Genres");
 
-                    b.Navigation("Reviews");
+                    b.Navigation("JoinEntities");
 
-                    b.Navigation("joinEntity");
+                    b.Navigation("Reviews");
                 });
 
             modelBuilder.Entity("MovieClient.Models.User", b =>

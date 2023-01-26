@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/e2c44950-d2bb-4868-a8b8-b629ae29f1c8/AppServices/subscriptions/e2c44950-d2bb-4868-a8b8-b629ae29f1c8/resourceGroups/marquee-rg/providers/Microsoft.Web/sites/marquee",
+  "appService.deploySubpath": "bin\\Release\\net6.0\\publish"
+}

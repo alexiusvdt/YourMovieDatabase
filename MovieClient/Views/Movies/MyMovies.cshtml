@@ -6,7 +6,13 @@
 @model MovieClient.Models.User
 @using MovieClient.Models
 
+<p>@Model.Name</p>
+
 <div class="container2">
+@{
+  List<Review> review = ViewBag.UserReviews;
+}
+
 @foreach(UserMovie join in Model.JoinEntities)
 {
   <div class="container-my-movie">
@@ -24,6 +30,26 @@
           <hr>
           <div class="overview">
             <p>@join.Movie.Overview</p>
+            @using (Html.BeginForm("RemoveMovieFromUser", "Movies"))
+            {
+              @Html.Hidden("joinId", @join.UserMovieId)
+              <input type="submit" value="Delete"/>
+            }
+          </div>
+          <hr>
+          <div class="overview">
+            @for (int i = 0; i < review.Count; i++)
+            {
+              if (join.Movie.Id == review[i].MovieId)
+              {
+                <p>My Review: @review[i].Text</p>
+                @using (Html.BeginForm("RemoveReviewFromUser", "Movies"))
+                {
+                  @Html.Hidden("reviewId", @review[i].ReviewId)
+                  <input type="submit" value="Delete"/>
+                }
+              }
+            }
           </div>
       </blockquote>  
     </div>

@@ -38,6 +38,8 @@ namespace MovieClient.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    Name = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     UserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     NormalizedUserName = table.Column<string>(type: "varchar(256)", maxLength: 256, nullable: true)
@@ -266,7 +268,7 @@ namespace MovieClient.Migrations
                 {
                     ReviewId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Text = table.Column<string>(type: "longtext", nullable: true)
+                    Text = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Rating = table.Column<int>(type: "int", nullable: false),
                     MovieId = table.Column<int>(type: "int", nullable: false),
@@ -372,8 +374,7 @@ namespace MovieClient.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_UserMovies_MovieId",
                 table: "UserMovies",
-                column: "MovieId",
-                unique: true);
+                column: "MovieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMovies_UserId",
