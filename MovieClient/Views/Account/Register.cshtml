@@ -17,14 +17,12 @@
 <!-- api contact method needed? -->
 @using (Html.BeginForm("Register", "Account", FormMethod.Post))
 {
-  @Html.LabelFor(user => user.Email)
-  @Html.TextBoxFor(user=> user.Email)
-
-  @*
   @Html.LabelFor(user=> user.Name)
   @Html.EditorFor(user=> user.Name)
-  *@
 
+  @Html.LabelFor(user => user.Email)
+  @Html.TextBoxFor(user=> user.Email)
+  
   @Html.LabelFor(user=> user.Password)
   @Html.EditorFor(user=> user.Password)
 
