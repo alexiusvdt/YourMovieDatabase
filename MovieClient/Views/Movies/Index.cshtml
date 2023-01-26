@@ -3,9 +3,11 @@
     Layout = "_Layout";
 }
 
-@using MovieClient.Models
-<div class="container-movie">
+<p>@Html.ActionLink("My Movies", "MyMovies")</p>
 
+@using MovieClient.Models
+
+<div class="container-movie">
     @foreach (Movie movie in Model)
     {
         <div class="poster">  
@@ -13,17 +15,10 @@
             string movie_link = @Url.Action("Details", "Movies", new {id = movie.Id});
             string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.Poster_Path}";
         }
-    
-            <a href=@movie_link>
-            
+            <a href=@movie_link>  
             <div class="poster-image">
                 <img src="@Url.Content(poster_src)" alt="Logo">
-                @*<figcaption>
-                    <h5>test</h5>
-                </figcaption>*@
-            </div>
-
-            
+            </div> 
             <div class="title-info">
                 <blockquote class="blockquote text-justify">
                     @Html.ActionLink($"{movie.Title}", "Details", new {id = movie.Id})
