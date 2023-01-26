@@ -47,15 +47,15 @@
       </div>
       @* <div class="card-body"> *@
         <ul class="list-group list-group-flush">
-          @using (Html.BeginForm("AddToUser", "Movies"))
+          <h4> &nbsp;&nbsp; @Html.ActionLink("Review", "CreateReview", "Movies", new { inputId = Model.Id})</h4>
         </ul>
-        <h4> &nbsp;&nbsp; @Html.ActionLink("Review", "CreateReview", "Movies", new { inputId = Model.Id})</h4>
         @if(@ViewBag.movieReviews.Reviews != null)
         {
         <ul>
           @foreach (Review review in @ViewBag.movieReviews.Reviews)
           {
-          <blockquote>@review.Text</blockquote>        
+          <blockquote>@review.Text</blockquote>
+          <blockquote>- @review.User.Name</blockquote>          
           }
         </ul>
         }

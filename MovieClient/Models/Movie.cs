@@ -19,7 +19,7 @@ namespace MovieClient.Models
     public List<Review> Reviews { get; set; }
     public int Rating { get; set; }
     public int NumberOfRatings { get; set; }
-    public UserMovie joinEntity { get; set; }
+    public List<UserMovie> JoinEntities { get; set; }
 
 
 
@@ -69,7 +69,7 @@ namespace MovieClient.Models
       //     // code block
       //     break;
       // }
-     
+
       var apiCallTask = ApiHelper.GetAdvSearch(apiKey, param, query);
       var result = apiCallTask.Result;
 

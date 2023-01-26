@@ -7,11 +7,13 @@
 
 <h1>Advanced Search</h1>
 
-@using (Html.BeginForm("", "Movies"))
+<!-- BeginForm(HtmlHelper, controller, action, route, FormMethod) -->
+@using (Html.BeginForm("AdvSearch", "Movies", FormMethod.Get))
 {
     @Html.Label("Select parameter")
     @Html.DropDownList("param", new List<SelectListItem>
     {
+        //value has to be a string, no ints!
         new SelectListItem{ Text="Genre", Value = "0"},
         new SelectListItem{ Text="Actor", Value = "1"}
     })
