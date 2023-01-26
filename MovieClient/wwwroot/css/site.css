@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,700;1,800&family=Cabin:wght@400;500;700&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;0,900;0,1000;1,300;1,400;1,500;1,600;1,700;1,900&family=Vidaloka&family=Yeseva+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,700;1,800&family=Cabin:wght@400;500;700&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;0,900;0,1000;1,300;1,400;1,500;1,600;1,700;1,900&family=Vidaloka&display=swap');
 
 /* body {
 flex-flow: row wrap;
@@ -189,7 +189,7 @@ flex-flow: row wrap;
 }
 
 .title {
-  font-family: 'Bitter', sans-serif;
+  font-family: 'Cabin', sans-serif;
   font-weight: 700;
   /* letter-spacing: .09rem; */
   text-shadow: 0.5px 0.5px 1px rgb(49, 49, 49);
@@ -199,14 +199,18 @@ flex-flow: row wrap;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Bitter', sans-serif;
+  font-family: 'Cabin', sans-serif;
 }
 
 .navbar-brand {
-  font-family: 'Vidaloka', serif;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-family: 'Cabin', sans-serif;
+  font-weight: 800;
+  text-transform: none;
+  font-style: italic;
   font-size: 2rem;
+  letter-spacing: .08rem;
+  text-shadow: 0.5px 0.5px 1px rgb(49, 49, 49);
+  margin: 0px 15px 0px 10px;
 }
 
 .icon {
