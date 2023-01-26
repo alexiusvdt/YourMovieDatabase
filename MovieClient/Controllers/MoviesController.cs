@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using MovieClient.Models;
 using MovieClient.ViewModels;
@@ -73,6 +74,24 @@ namespace MovieClient.Controllers
       _db.SaveChanges();
 
       return RedirectToAction("Details", new { id = inputId});
+    }
+
+    //new
+    public async Task<ActionResult> MyMovies()
+    {
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      User thisUser = _db.Users.Include(join => join.JoinEntities).ThenInclude(join => join.Movie).FirstOrDefault(entry => entry.UserAccount.Id == currentUser.Id);
+  
+      //Movie movie = Movie.GetDetails(id, _apikey);
+      // .Include(join => join.JoinEntities).ThenIncude(join => join.)
+
+
+      // List<Item> model = _db.Items
+      //                       .Include(item => item.Category)
+      //                       .ToList();
+      return View(thisUser);
+
     }
   }
 }
