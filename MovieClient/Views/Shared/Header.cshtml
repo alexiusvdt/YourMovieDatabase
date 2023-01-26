@@ -20,18 +20,22 @@
                 </div>
                     @using (Html.BeginForm("Search", "Movies", FormMethod.Get))
                     {
-                        @Html.TextBox("query", "", new { @class = "nav-search" }) 
-                        <input type="submit" value="Search" class="nav-search">
+                        @Html.TextBox("query", "", new { @class = "mr-sm-2" }) 
+                <input type="submit" value="Search" class="btn btn-sm my-2 my-sm-2 btn-outline-dark">
                     }
 
                         @if (User.Identity.IsAuthenticated)
                         {
-                          <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">Hello @User.Identity.Name!</a>
-                        
+                          <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Index">
+                            <div class="icon">
+                                a
+                            </div>
+                        </a>
+@*                         
                         @using (Html.BeginForm("LogOff", "Account"))
                         {
-                          <input type="submit" class="btn" value="Log out">
-                        }
+                          <input type="submit" class="btn btn-sm my-2 my-sm-2" value="Log out">
+                        } *@
                         }
                         else
                         {

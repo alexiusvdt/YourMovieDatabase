@@ -22,7 +22,7 @@
 
   @Html.LabelFor(user => user.Email)
   @Html.TextBoxFor(user=> user.Email)
-  
+
   @Html.LabelFor(user=> user.Password)
   @Html.EditorFor(user=> user.Password)
 
@@ -31,7 +31,7 @@
 
   //image uploader?
 
-  <input type="submit" value="Register" />
+  <input type="submit" class="btn btn-sm my-2 my-sm-2 btn-outline-dark" value="Register" />
 }
 
 <p>@Html.ActionLink("Back to accounts page", "Index")</p>

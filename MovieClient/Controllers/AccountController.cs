@@ -39,9 +39,9 @@ namespace MovieClient.Controllers
       }
       else
       {
-        ApplicationUser user = new ApplicationUser { UserName = model.Email, };
+        ApplicationUser user = new ApplicationUser { UserName = model.Email, Name = model.Name };
         IdentityResult result = await _userManager.CreateAsync(user, model.Password);
-        User userObject = new User { UserAccount = user };
+        User userObject = new User { UserAccount = user, Name = model.Name };
         if (result.Succeeded)
         {
           
