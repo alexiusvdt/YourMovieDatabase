@@ -23,7 +23,6 @@ namespace MovieClient.Controllers
       _userManager = userManager;
       _db = db;
     }
-
     public IActionResult Index()
     {
         return View(Movie.GetMovies(_apikey));

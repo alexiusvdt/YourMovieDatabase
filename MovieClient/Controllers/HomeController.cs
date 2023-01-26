@@ -10,20 +10,27 @@ namespace MovieClient.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly string _apikey;   
         private readonly MovieClientContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(UserManager<ApplicationUser> userManager, MovieClientContext db)
+        public HomeController(UserManager<ApplicationUser> userManager, MovieClientContext db, IConfiguration configuration)
         {
+        _apikey = configuration["TMDB"];
         _userManager = userManager;
         _db = db;
         }
 
         [HttpGet("/")]
-        public async Task<ActionResult> Index()
+        public IActionResult Index()
         {
-        return View();
+        return View(Movie.GetMovies(_apikey));
         }
+
+        // public IActionResult Index()
+        // {
+        //     return View(Movie.GetMovies(_apikey));
+        // }
 
         [HttpGet("/privacy")]
         public async Task<ActionResult> Privacy()

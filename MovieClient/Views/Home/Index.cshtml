@@ -3,13 +3,23 @@
     Layout = "_Layout";
 }
 
-@model MovieClient.Models.User
 @using MovieClient.Models
 
-<div class="container-home">
-  <h2 class="title">welcome</h2>
+<div class="center-div">
+<h3 style="text-transform: uppercase;">your movies. your watchlist.</h3>
+  <span class="lead" style="line-height: 0.8rem; margin: auto;">Welcome to Marquee, your one-stop destination for movie watchlists and reviews.</span>
+  <p style="width: 80%; margin: auto; text-align: center;">
+  Our site is dedicated to helping you discover the latest and greatest films, as well as providing in-depth reviews and ratings to help you decide what to watch. Whether you're a movie buff or simply looking for something to stream on a lazy Sunday afternoon, Marquee has something for everyone. Browse through our extensive selection of films, create your own watchlists, and read reviews from our team of expert critics. Join us now and start exploring the world of cinema!
+  </p>
 </div>
 
-<a class="nav-link enlarge" href='/Account'>Account</a>
-<a class="nav-link enlarge" href='/Movies'>Movies</a>
-<p>test</p>
+<div class="marquee">
+  <div class="marquee-group">
+  @foreach (Movie movie in Model)
+    {
+      <span> </span>
+          string poster_src = $"https://image.tmdb.org/t/p/w600_and_h900_bestv2/{movie.Poster_Path}";
+          string movie_link = @Url.Action("Details", "Movies", new {id = movie.Id});
+      <a href=@movie_link><img src="@Url.Content(poster_src)" alt="Movie poster"></a>
+    }
+</div>

@@ -140,14 +140,14 @@ flex-flow: row wrap;
   padding-top: 8px;
 }
 
-.title {
-  font-size: 13px;
+.my-movie-title {
+  font-size: 20px;
   text-transform: uppercase;
   font-weight: 475;
   text-shadow: 1px 1px 2px rgb(248, 244, 244);
   letter-spacing: .09rem;
   line-height: 85%;
-}
+} 
 
 .overview {
   text-transform: none;
@@ -155,6 +155,25 @@ flex-flow: row wrap;
   letter-spacing: .05rem;
   line-height: normal;
   font-size: 12px;
+
+}
+
+.scroller{
+  width: auto;
+  height: 350px;
+  overflow-y: scroll;
+  scrollbar-color: rgba(143, 142, 144, 0.716) rgba(255, 255, 255, 0.375);
+  scrollbar-width: thin;
+}
+
+hr {
+  -moz-box-sizing: border-box;
+  -moz-float-edge: margin-box;
+  border: 1px inset;
+  color: gray;
+  display: block;
+  height: 1px;
+  margin: 0.5em auto;
 }
    
 .container {
@@ -213,6 +232,11 @@ h1, h2, h3, h4 {
   margin: 0px 15px 0px 10px;
 }
 
+.center-div {
+  margin: auto;
+  text-align: center;
+}
+
 .icon {
   color: rgb(248, 244, 244);
   text-align: center;
@@ -238,7 +262,6 @@ h1, h2, h3, h4 {
 
 input {
   margin-bottom: 1rem;
-  /* margin: 10px 10px 10px; */
 }
 
 label {
@@ -247,4 +270,43 @@ label {
   margin: 10px 5px 5px 10px;
   width: 200px;
   text-align: justify;
+}
+
+.marquee img {
+  height: 220px;
+  width: auto;
+  border: 2px solid white;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.25);
+  margin: 10px 3px 10px 3px;
+}
+
+.marquee {
+  --duration: 60s;
+  --gap: var(--space);
+
+  height: 250px;
+  width: 100%;
+  /* background-color: rgba(236, 227, 209, 0.888); */
+  display: flex;
+  overflow: hidden;
+}
+
+.marquee-group {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: var(--gap);
+  min-width: 100%;
+    animation: scroll var(--duration) linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+      transform: translateX(0);
+    }
+  
+    100% {
+      transform: translateX(-100%);
+}
 }

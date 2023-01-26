@@ -9,7 +9,7 @@
   int num = ViewBag.MovieId;
 }
 <div style="text-align: center;">
-  <h2>Add a review for [movie title]</h2>
+  <h2>Add a review for @ViewBag.MovieTitle</h2>
 @using (Html.BeginForm("CreateReview", "Movies"))
 {
     @Html.Hidden("MovieId", num)
