@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Bitter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,700;1,800&family=Cabin:wght@400;500;700&family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,700;0,800;0,900;0,1000;1,300;1,400;1,500;1,600;1,700;1,900&family=Vidaloka&display=swap');
 
 /* body {
 flex-flow: row wrap;
@@ -12,6 +12,15 @@ flex-flow: row wrap;
   padding-bottom: 30px;
 } */
 
+.container {
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+.navbar, .navbar-expand-sm, .navbar-toggleable-sm, .navbar-light {
+  margin-bottom: 0px;
+}
+
 .container-movie {
   display: flex;
   flex-flow: row wrap;
@@ -20,6 +29,16 @@ flex-flow: row wrap;
   padding: 10px 10px 10px;
   background-color: rgba(236, 227, 209, 0.888);
   padding-bottom: 30px;
+}
+
+.container-home {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  flex: 6;
+  padding: 10px 10px 10px;
+  background-color: rgba(236, 227, 209, 0.888);
+  width: 100%;
 }
 
 .poster-image {
@@ -176,4 +195,56 @@ flex-flow: row wrap;
   text-shadow: 0.5px 0.5px 1px rgb(49, 49, 49);
   font-size: 2.5rem;
   color: rgb(29, 29, 29);
+  text-transform: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cabin', sans-serif;
+}
+
+.navbar-brand {
+  font-family: 'Cabin', sans-serif;
+  font-weight: 800;
+  text-transform: none;
+  font-style: italic;
+  font-size: 2rem;
+  letter-spacing: .08rem;
+  text-shadow: 0.5px 0.5px 1px rgb(49, 49, 49);
+  margin: 0px 15px 0px 10px;
+}
+
+.icon {
+  color: rgb(248, 244, 244);
+  text-align: center;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  padding: 10px;
+  background: rgb(95, 79, 187);
+  border: 3px solid rgb(95, 79, 187)
+  text-align: center;
+  text-shadow: none;
+}
+
+.mr-sm-2 {
+  width: 100px;
+}
+
+.btn-sm {
+  height: 30px;
+  border: transparent;
+  background-color: antiquewhite;
+}
+
+input {
+  margin-bottom: 1rem;
+  /* margin: 10px 10px 10px; */
+}
+
+label {
+  font-weight: 300;
+  padding: 5px;
+  margin: 10px 5px 5px 10px;
+  width: 200px;
+  text-align: justify;
 }

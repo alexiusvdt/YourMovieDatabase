@@ -6,8 +6,6 @@
 @model MovieClient.Models.User
 @using MovieClient.Models
 
-<p>@Html.ActionLink("Back to Movies", "Index")</p>
-
 <div class="container2">
 @foreach(UserMovie join in Model.JoinEntities)
 {
